@@ -11,8 +11,27 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_09_24_171849) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "camp_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["camp_id"], name: "index_bookmarks_on_camp_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "camp_supplies", force: :cascade do |t|
+    t.bigint "camp_id", null: false
+    t.bigint "supply_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["camp_id"], name: "index_camp_supplies_on_camp_id"
+    t.index ["supply_id"], name: "index_camp_supplies_on_supply_id"
+  end
 
   create_table "camps", force: :cascade do |t|
     t.string "title", null: false
@@ -56,6 +75,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_171849) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookmarks", "camps"
+  add_foreign_key "bookmarks", "users"
+  add_foreign_key "camp_supplies", "camps"
+  add_foreign_key "camp_supplies", "supplies"
   add_foreign_key "reviews", "camps"
   add_foreign_key "reviews", "users"
 end
