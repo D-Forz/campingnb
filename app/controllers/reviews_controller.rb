@@ -2,8 +2,11 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.camp = @camp
-    @review.save
-    redirect_to camp_path(@camp)
+    if @review.save
+      redirect_to camp_path(@camp)
+    else
+      render 'camp/show', status: :unprocessable_entity
+    end
   end
 
   def destroy
