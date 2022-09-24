@@ -1,0 +1,2 @@
+class Supplie < ApplicationRecord
+end
