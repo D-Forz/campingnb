@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_24_185922) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_24_191043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_185922) do
     t.datetime "updated_at", null: false
     t.index ["camp_id"], name: "index_bookmarks_on_camp_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "camp_supplies", force: :cascade do |t|
+    t.bigint "camp_id", null: false
+    t.bigint "supply_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["camp_id"], name: "index_camp_supplies_on_camp_id"
+    t.index ["supply_id"], name: "index_camp_supplies_on_supply_id"
   end
 
   create_table "camps", force: :cascade do |t|
@@ -67,6 +76,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_185922) do
 
   add_foreign_key "bookmarks", "camps"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "camp_supplies", "camps"
+  add_foreign_key "camp_supplies", "supplies"
   add_foreign_key "reviews", "camps"
   add_foreign_key "reviews", "users"
 end
