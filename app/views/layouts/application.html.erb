@@ -11,8 +11,9 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="container m-3">
+      <%= yield %>
+      <%= render 'shared/alerts' %>
+    </div>
   </body>
 </html>
