@@ -1,6 +1,6 @@
-class CreateSupplies < ActiveRecord::Migration[7.0]
+class CreateSupply < ActiveRecord::Migration[7.0]
   def change
-    create_table :supplies do |t|
+    create_table :supply do |t|
       t.string :name
 
       t.timestamps
