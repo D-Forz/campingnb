@@ -1,7 +1,6 @@
 class Camp < ApplicationRecord
-  SUPPLIES = ["Nevera", "Madera", "Camping chair", "Camping Lanterns"]
-  has_many :reviews, dependent: :destroy
-  has_many :supplies, through: :camp_supplies
+  belongs_to :user
 
-  validates :title, presence: true, uniqueness: true
+  has_many :bookings
+  has_many :bookmarks
 end
