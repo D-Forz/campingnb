@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_24_171849) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_09_25_163609) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "camp_id", null: false
+    t.bigint "user_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["camp_id"], name: "index_bookings_on_camp_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
 
   create_table "bookmarks", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -24,40 +34,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_171849) do
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
-  create_table "camp_supplies", force: :cascade do |t|
-    t.bigint "camp_id", null: false
-    t.bigint "supply_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["camp_id"], name: "index_camp_supplies_on_camp_id"
-    t.index ["supply_id"], name: "index_camp_supplies_on_supply_id"
-  end
-
   create_table "camps", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "content", null: false
-    t.integer "price", default: 0, null: false
-    t.integer "number_of_guests", default: 0, null: false
-    t.integer "number_of_tents", default: 0, null: false
+    t.string "title"
+    t.text "content"
+    t.integer "price"
+    t.integer "number_of_guests"
+    t.integer "number_of_tents"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_camps_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
     t.text "content"
     t.integer "rating"
-    t.bigint "user_id", null: false
-    t.bigint "camp_id", null: false
+    t.bigint "booking_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["camp_id"], name: "index_reviews_on_camp_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
-  end
-
-  create_table "supplies", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_reviews_on_booking_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,10 +70,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_171849) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "camps"
+  add_foreign_key "bookings", "users"
   add_foreign_key "bookmarks", "camps"
   add_foreign_key "bookmarks", "users"
-  add_foreign_key "camp_supplies", "camps"
-  add_foreign_key "camp_supplies", "supplies"
-  add_foreign_key "reviews", "camps"
-  add_foreign_key "reviews", "users"
+  add_foreign_key "camps", "users"
+  add_foreign_key "reviews", "bookings"
 end
