@@ -20,7 +20,7 @@ class ReviewsController < ApplicationController
   private
 
   def set_booking
-    @booking = Booking.find(params[:booking_id])
+    @booking = Booking.find(params[:id])
   end
 
   def review_params
