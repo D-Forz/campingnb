@@ -1,11 +1,13 @@
 class CreateCamps < ActiveRecord::Migration[7.0]
   def change
     create_table :camps do |t|
-      t.string :title
-      t.text :content
+      t.string :name
+      t.text :description
+      t.date :start_date
+      t.date :end_date
+      t.string :location
       t.integer :price
-      t.integer :number_of_guests
-      t.integer :number_of_tents
+      t.integer :capacity
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

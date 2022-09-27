@@ -4,8 +4,8 @@
     <div class="card">
       <img src="..." class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title"><%= camp.title %></h5>
-        <p class="card-text"><%= camp.content %></p>
+      <h5 class="card-title"><%= link_to camp.name, camp_path(camp) %></h5>
+        <p class="card-text"><%= camp.description %></p>
       </div>
     </div>
   </div>

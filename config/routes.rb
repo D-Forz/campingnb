@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :bookmarks
   resources :camps do
-    resources :reviews
-    resources :camp_supplies
+    resources :reviews, only: :create
+    resources :bookings, only: :create
   end
+  resources :reviews, only: :destroy
+  resources :bookings, only: :destroy
 end

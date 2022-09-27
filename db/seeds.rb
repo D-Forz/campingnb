@@ -8,6 +8,7 @@
 
 p 'Deleting records...'
 Camp.delete_all
+User.delete_all
 
 user = User.create!(
   first_name: "juan",
@@ -19,14 +20,16 @@ user = User.create!(
 
 15.times do
   camp = Camp.create!(
-    title: (0...8).map { (65 + rand(26)).chr }.join,
-    content: Faker::Quote.famous_last_words,
-    price: rand(150..999),
-    number_of_guests: rand(2..8),
-    number_of_tents: rand(1..3),
-    user_id: user.id
+    name: Faker::Games::Pokemon.name,
+    description: Faker::Games::Pokemon.move,
+    start_date: Faker::Date.between(from: 7.days.ago, to: 2.days.from_now),
+    end_date: Faker::Date.between(from: 6.days.ago, to: 9.days.from_now),
+    location: Faker::Games::Pokemon.location,
+    price: Faker::Number.between(from: 20, to: 100),
+    capacity: Faker::Number.between(from: 2, to: 8),
+    user: user
   )
-  p "#{camp.title} has been added to the DB."
+  p "#{camp.name} has been added to the DB."
 end
 
 1.upto 10 do |i|

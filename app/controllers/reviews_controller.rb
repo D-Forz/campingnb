@@ -1,11 +1,12 @@
 class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
-    @review.camp = @camp
+    @review.booking = @booking
     if @review.save
       redirect_to camp_path(@camp)
     else
-      render 'camp/show', status: :unprocessable_entity
+      @camp = Camp.find(params[:camp_id])
+      render 'camps/show', status: :unprocessable_entity
     end
   end
 
@@ -17,7 +18,11 @@ class ReviewsController < ApplicationController
 
   private
 
-  def set_camp
-    @camp = Camp.find(params[:id])
+  def set_booking
+    @booking = Booking.find(params[:booking_id])
+  end
+
+  def review_params
+    params.require(:review).permit(:rating, :content)
   end
 end
