@@ -6,8 +6,6 @@ class CampsController < ApplicationController
   end
 
   def show
-    @booking = Booking.new
-    @review = Review.new
   end
 
   def new
@@ -20,7 +18,7 @@ class CampsController < ApplicationController
     @camp.user = current_user
     authorize @camp
     if @camp.save
-      redirect_to camp_path(@camp)
+      redirect_to camp_path(@camp), notice: "Successfully created camp."
     else
       render :new, status: :unprocesabble_entity
     end

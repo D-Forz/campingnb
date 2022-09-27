@@ -1,13 +1,30 @@
 class BookingsController < ApplicationController
+  before_action :set_camp, only: %i[new create show]
+  before_action :set_booking, only: %i[show destroy]
+  def new
+    @booking = Booking.new
+    authorize @booking
+  end
+
+  def show
+    @review = Review.new
+    authorize @booking
+  end
+
+  def destroy
+    @booking.destroy
+    authorize @booking
+    redirect_to camp_path(@booking.camp), notice: "Successfully deleted booking."
+  end
+
   def create
     @booking = Booking.new(booking_params)
     @booking.camp = @camp
-    @booking.user = @user
+    @booking.user = current_user
     authorize @booking
     if @booking.save
-      redirect_to camp_path(@camp), notice: "Successfully created booking."
+      redirect_to camp_booking_path(@booking), notice: "Successfully created booking."
     else
-      @camp = Camp.find(params[:camp_id])
       render 'camps/show', status: :unprocessable_entity
     end
   end
@@ -18,11 +35,11 @@ class BookingsController < ApplicationController
     @camp = Camp.find(params[:camp_id])
   end
 
-  def set_user
-    @user = User.find(params[:user_id])
+  def set_booking
+    @booking = Booking.find(params[:id])
   end
 
   def booking_params
-    params.require(:booking).permit(:camp_id, :user_id, :start_date, :end_date)
+    params.require(:booking).permit(:start_date, :end_date)
   end
 end
