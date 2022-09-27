@@ -1,2 +1,32 @@
 <h1>Camps#show</h1>
 <p>Find me in app/views/camps/show.html.erb</p>
+
+<%= link_to 'Edit', edit_camp_path(@camp) %>
+<%= link_to 'Back', camps_path %>
+
+<%= @camp.name %>
+<%= @camp.description %>
+<%= @camp.start_date %>
+<%= @camp.end_date %>
+<%= @camp.location %>
+<%= @camp.price %>
+<%= @camp.capacity %>
+
+<h2>Create booking</h2>
+<%= simple_form_for [@camp, @booking] do |f| %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.button :submit %>
+<% end %>
+
+<h2>Reviews</h2>
+<% @camp.reviews.each do |review| %>
+  <p><%= review.content %></p>
+  <p><%= review.rating %></p>
+<% end %>
+
+<%= simple_form_for [@camp, @review] do |f| %>
+  <%= f.input :content %>
+  <%= f.input :rating %>
+  <%= f.button :submit %>
+<% end %>

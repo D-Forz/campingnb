@@ -30,8 +30,8 @@ class CampsController < ApplicationController
   end
 
   def update
-    @camp.update(set_camp)
-    redirect_to camp_path(@path)
+    @camp.update(params_camp)
+    redirect_to camp_path(@camp)
   end
 
   def destroy
@@ -48,11 +48,13 @@ class CampsController < ApplicationController
 
   def params_camp
     params.require(:camp).permit(
-      :title,
-      :content,
+      :name,
+      :description,
+      :start_date,
+      :end_date,
+      :location,
       :price,
-      :number_of_guests,
-      :number_of_tents
+      :capacity
     )
   end
 end
