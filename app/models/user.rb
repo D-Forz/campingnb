@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_many :camps
   has_many :bookings
   has_many :bookmarks
-  has_many :reviews, through: :bookings
+  has_many :reviews, through: :camps
 end

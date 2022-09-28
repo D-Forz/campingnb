@@ -44,7 +44,7 @@ end
 Review.create!(
   rating: 5,
   content: "This was a great camp!",
-  booking_id: 1
+  camp_id: 1
 )
 
 p 'All records were created'

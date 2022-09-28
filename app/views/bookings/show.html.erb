@@ -2,9 +2,3 @@
 <p><%= @booking.start_date %></p>
 <p><%= @booking.end_date %></p>
 <p><%= @booking.user.email %></p>
-
-<%= simple_form_for [@camp, @review] do |f| %>
-  <%= f.input :content %>
-  <%= f.input :rating %>
-  <%= f.button :submit %>
-<% end %>

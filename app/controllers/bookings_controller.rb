@@ -23,7 +23,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     authorize @booking
     if @booking.save
-      redirect_to camp_booking_path(@booking), notice: "Successfully created booking."
+      redirect_to camp_booking_path(@camp, @booking), notice: "Successfully created booking."
     else
       render 'new', status: :unprocessable_entity
     end
