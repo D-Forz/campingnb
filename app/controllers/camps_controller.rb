@@ -53,7 +53,8 @@ class CampsController < ApplicationController
       :end_date,
       :location,
       :price,
-      :capacity
+      :capacity,
+      photos: []
     )
   end
 end
