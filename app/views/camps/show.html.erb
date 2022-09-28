@@ -21,8 +21,12 @@
   <p><%= review.rating %></p>
 <% end %>
 
-<%= simple_form_for [@camp, @review] do |f| %>
-  <%= f.input :content %>
-  <%= f.input :rating %>
-  <%= f.button :submit %>
+<% if policy(Review).create? %>
+  <%= simple_form_for [ @camp, @review ] do |f| %>
+    <%= f.input :content %>
+    <%= f.input :rating %>
+    <%= f.button :submit %>
+  <% end %>
+<% else %>
+  <p>Create a booking to leave a review</p>
 <% end %>
