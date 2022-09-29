@@ -1,1 +1,31 @@
 // Specific CSS for your home-page
+.hero-banner {
+  border-radius: 10px;
+  background-color: white;
+  position: relative;
+  background-image: url(/home/juan_tavera/code/FelipeTavera1/projects/projects-rails/campingnb/app/assets/images/IMGnoche.jfif);
+  left: 5%;
+}
+
+// .hero-banner h1 {
+//   font-size: 48px;
+// }
+
+// .hero-banner .btn:before {
+//   content: "";
+//   background: #ed5561;
+//   width: 4px;
+//   height: 100%;
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   z-index: -1;
+//   -webkit-transition: all 0.5s ease-in-out 0s;
+//   -moz-transition: all 0.5s ease-in-out 0s;
+//   -ms-transition: all 0.5s ease-in-out 0s;
+//   -o-transition: all 0.5s ease-in-out 0s;
+//   transition: all 0.5s ease-in-out 0s;
+// }
+// .hero-banner .btn:hover:before {
+//   width: 100%;
+// }
