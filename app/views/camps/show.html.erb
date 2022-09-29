@@ -1,32 +1,43 @@
-<h1>Camps#show</h1>
-<p>Find me in app/views/camps/show.html.erb</p>
+<div class="row justify-content-center">
+  <div class="col-10 align-self-center">
+    <div class="row row-cols-2 mt-3">
+      <div class="col-6">
+        <div style="width: 600px; height: 450px; background-color: #000000;" class="mt-2">
+        </div>
+        <h2><%= @camp.name %></h2>
+        <p><%= @camp.description %></p>
+        <p><%= @camp.price %>€</p>
+        <p><%= @camp.capacity %> places</p>
+        <hr>
+        <h3>Location</h3>
+        <p><%= @camp.location %></p>
+      </div>
+      <div class="col-4">
+        <span>Create Booking</span>
+        <%= link_to "Book Now", new_camp_booking_path(@camp), class: 'btn btn-primary'%>
+        <p>formulario para buscar fechas y llevar a la reserva</p>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <h2>Reviews</h2>
+      <% @camp.reviews.each do |review| %>
+        <p><%= review.content %></p>
+        <p><%= review.rating %></p>
+      <% end %>
+
+      <% if policy(Review).create? %>
+        <%= simple_form_for [ @camp, @review ] do |f| %>
+          <%= f.input :content %>
+          <%= f.input :rating %>
+          <%= f.button :submit %>
+        <% end %>
+      <% else %>
+        <p>Create a booking to leave a review</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
 
 <%= link_to 'Edit', edit_camp_path(@camp) %>
 <%= link_to 'Back', camps_path %>
-
-<%= @camp.name %>
-<%= @camp.description %>
-<%= @camp.start_date %>
-<%= @camp.end_date %>
-<%= @camp.location %>
-<%= @camp.price %>
-<%= @camp.capacity %>
-
-<h2>Create booking</h2>
-<p>formulario para buscar fechas y llevar a la reserva</p>
-
-<h2>Reviews</h2>
-<% @camp.reviews.each do |review| %>
-  <p><%= review.content %></p>
-  <p><%= review.rating %></p>
-<% end %>
-
-<% if policy(Review).create? %>
-  <%= simple_form_for [ @camp, @review ] do |f| %>
-    <%= f.input :content %>
-    <%= f.input :rating %>
-    <%= f.button :submit %>
-  <% end %>
-<% else %>
-  <p>Create a booking to leave a review</p>
-<% end %>
