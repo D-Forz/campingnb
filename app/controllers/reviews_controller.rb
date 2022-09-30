@@ -3,6 +3,7 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.camp = @camp
+    @review.user = current_user
     authorize @review
     if @review.save
       redirect_to camp_path(@camp), notice: "Successfully created review."
