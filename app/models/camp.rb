@@ -6,9 +6,9 @@ class Camp < ApplicationRecord
   has_many :bookmarks
   has_many_attached :photos
 
-  validates :name, :description, :location, :start_date, :end_date, presence: true
-  validates :price, presence: true, numericality: { only_integer: true }
-  validates :location, presence: true
+  validates :name, :location, :start_date, :end_date, presence: true
+  validates :description, length: { minimum: 20 }, allow_blank: false
+  validates :price, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :capacity, presence: true, numericality: { only_integer: true }, inclusion: { in: 1..10 }
   validates :photos, presence: true
   validate :start_date_cannot_be_in_the_past
