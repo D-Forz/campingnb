@@ -80,15 +80,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_014701) do
     t.integer "rating"
     t.text "content"
     t.bigint "camp_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["camp_id"], name: "index_reviews_on_camp_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.boolean "owner", default: false, null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -108,4 +109,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_014701) do
   add_foreign_key "bookmarks", "users"
   add_foreign_key "camps", "users"
   add_foreign_key "reviews", "camps"
+  add_foreign_key "reviews", "users"
 end

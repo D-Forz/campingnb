@@ -20,13 +20,23 @@
     </div>
     <div class="row mt-3">
     <hr>
-      <h2>Reviews</h2>
-      <% @camp.reviews.each do |review| %>
-        <p><%= review.content %></p>
-        <p><%= review.rating %></p>
+      <h2>❤ <%= @camp.reviews.average(:rating) %> · <%= @camp.reviews.count %>
+      <%= 'review' if @camp.reviews.count == 1 %> <%= 'reviews' if @camp.reviews.count > 1 %></h2>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <% @camp.reviews.each do |review| %>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= review.user.full_name %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= review.created_at %></h6>
+              <p class="card-text"><%= review.content %></p>
+            </div>
+          </div>
+        </div>
       <% end %>
-
-      <% if policy(Review).create? %>
+      </div>
+    </div>
+      <% if user_signed_in? && current_user.booked?(@camp) %>
         <%= simple_form_for [ @camp, @review ] do |f| %>
           <%= f.input :content %>
           <%= f.input :rating %>
