@@ -8,4 +8,24 @@ class User < ApplicationRecord
   has_many :bookings
   has_many :bookmarks
   has_many :reviews, through: :camps
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def owner?(camp)
+    camp.user == self
+  end
+
+  def booked?(camp)
+    camp.bookings.where(user: self).any?
+  end
+
+  def bookmarked?(camp)
+    camp.bookmarks.where(user: self).any?
+  end
+
+  def reviewed?(camp)
+    camp.reviews.where(user: self).any?
+  end
 end

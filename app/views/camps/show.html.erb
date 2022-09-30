@@ -26,7 +26,7 @@
         <p><%= review.rating %></p>
       <% end %>
 
-      <% if policy(Review).create? %>
+      <% if current_user.booked?(@camp) %>
         <%= simple_form_for [ @camp, @review ] do |f| %>
           <%= f.input :content %>
           <%= f.input :rating %>
