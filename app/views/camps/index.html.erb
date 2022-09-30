@@ -1,13 +1,31 @@
-<div class="row row-cols-1 row-cols-md-2 g-4">
-<% @camps.each do |camp| %>
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-      <h5 class="card-title"><%= link_to camp.name, camp_path(camp) %></h5>
-        <p class="card-text"><%= camp.description %></p>
-      </div>
+<div class="row justify-content-center">
+  <div class="col-12">
+    <div class="row row-cols-4 mt-3">
+      <% @camps.each do |camp| %>
+        <div class="col">
+          <div class="card border-0 m-1" style="border-radius: 4%;">
+            <%= cl_image_tag camp.photos.first.key, class: "card-img-top", radius: 5, height: 200, width: 300, crop: :fill %>
+            <div class="card-body">
+              <ul class="list-inline d-flex justify-content-between">
+                <li class="list-inline-item card-title"><%= camp.name %></li>
+                <li class="list-inline-item">❤5</li>
+              </ul>
+              <p class="card-text"><%= camp.start_date %> - <%= camp.end_date %></p>
+              <p class="card-text">$<%= camp.price %> COP noche</p>
+              <%= link_to 'See Details', camp_path(camp), class: 'card-link text-center' %>
+              <%= link_to 'Edit', edit_camp_path(camp), class: 'card-link' %>
+              <%= link_to 'Destroy', camp_path(camp),
+              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+              class: 'card-link' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
-<% end %>
 </div>
+
+
+ <%# @camp.photos.each do |photo| %>
+  <%#= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<%# end %>
