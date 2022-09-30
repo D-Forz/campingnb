@@ -13,10 +13,14 @@
               <p class="card-text"><%= camp.start_date %> - <%= camp.end_date %></p>
               <p class="card-text">$<%= camp.price %> COP noche</p>
               <%= link_to 'See Details', camp_path(camp), class: 'card-link text-center' %>
-              <%= link_to 'Edit', edit_camp_path(camp), class: 'card-link' %>
-              <%= link_to 'Destroy', camp_path(camp),
-              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-              class: 'card-link' %>
+              <% if policy(camp).update? %>
+                <%= link_to 'Edit', edit_camp_path(camp), class: 'card-link' %>
+              <% end %>
+              <% if policy(camp).destroy? %>
+                <%= link_to 'Destroy', camp_path(camp),
+                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                class: 'card-link' %>
+              <% end %>
             </div>
           </div>
         </div>
