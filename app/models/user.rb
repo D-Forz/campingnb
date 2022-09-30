@@ -17,7 +17,7 @@ class User < ApplicationRecord
     camp.user == self
   end
 
-  def booked?(camp)
+  def reviewed?(camp)
     camp.bookings.where(user: self).any? && camp.reviews.where(user: self).empty?
   end
 
@@ -25,7 +25,7 @@ class User < ApplicationRecord
     camp.bookmarks.where(user: self).any?
   end
 
-  def reviewed?(camp)
-    camp.reviews.where(user: self).any?
+  def booked?(camp)
+    camp.bookings.where(user: self).any?
   end
 end
