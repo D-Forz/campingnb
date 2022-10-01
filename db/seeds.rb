@@ -29,8 +29,8 @@ user2 = User.create!(
 
 p "User #{user2.email} created"
 
-3.times do
-  file = URI.open('https://res.cloudinary.com/dryjnfxju/image/upload/v1664494779/Wilderness_Adventure_Camps_u5wj1e.jpg')
+1.upto(3) do |i|
+  file = File.open(Rails.root.join('app', 'assets', 'images', "camp#{i}.jpg"))
   camp = Camp.new(
     name: Faker::Restaurant.name,
     description: Faker::Restaurant.description,
@@ -41,7 +41,7 @@ p "User #{user2.email} created"
     capacity: Faker::Number.between(from: 2, to: 8),
     user: user1
   )
-  camp.photos.attach(io: file, filename: 'camp.png', content_type: 'image/png')
+  camp.photos.attach(io: file, filename: "camp#{i}.jpg", content_type: 'image/jpg')
   camp.save!
   p "#{camp.name} has been added to the DB."
 end
