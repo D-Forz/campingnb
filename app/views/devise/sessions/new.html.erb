@@ -1,32 +1,35 @@
 <section>
   <div class="row">
     <div class="col-lg-7">
-      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        </div>
+      <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="../../../assets/images/camp1.jpg" class="d-block w-100" alt="...">
+            <%= cl_image_tag 'camp1', class: 'd-block w-100' %>
+          </div>
+          <div class="carousel-item">
+            <%= cl_image_tag 'camp2', class: 'd-block w-100' %>
+          </div>
+          <div class="carousel-item">
+            <%= cl_image_tag 'camp3', class: 'd-block w-100' %>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
 
-    </div class="col-lg-7">
+    </div>
 
     <div class="mt-2 col-lg-5 d-flex flex-column min-vh-100">
-      <div class="rounded-3 w-100 ">
+      <div class="rounded-3 w-100">
         <h2 class="mb-4 w-100">Log in</h2>
             <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <div class="mb-5 ">
+              <div class="mb-3">
                 <div class="form-inputs ">
                   <%= f.input :email,
                               required: false,
@@ -38,14 +41,16 @@
                   <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
                 </div>
 
-                <div class="form-actions w-100 btn btn-outline-secondary btn-sm mb-2">
-                  <%= f.button :submit, "Sign in" %>
+                <div class="form-actions w-100 btn btn-outline-secondary">
+                  <%= f.button :submit, "Log in" %>
                 </div>
               </div>
             <% end %>
-
-            <div class="text-muted text-decoration-none">
-              <%= render "devise/shared/links" %>
+            <div class="">
+              <p class="text-center text muted">Don't have an account?</p>
+              <div class="form-actions w-100 text-muted text-decoration-none">
+                <%= render "devise/shared/links" %>
+              </div>
             </div>
       </div>
     </div>
