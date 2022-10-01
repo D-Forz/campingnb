@@ -7,7 +7,7 @@
           <div class="card-body">
             <ul class="list-inline d-flex justify-content-between">
               <li class="list-inline-item card-title"><%= booking.camp.name %></li>
-              <li class="list-inline-item">❤5</li>
+              <li class="list-inline-item">❤ <%= booking.camp.reviews.average(:rating) %></li>
             </ul>
             <p class="card-text"><%= booking.start_date %> - <%= booking.end_date %></p>
             <p class="card-text">$ COP noche</p>
