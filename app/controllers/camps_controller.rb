@@ -21,7 +21,7 @@ class CampsController < ApplicationController
     if @camp.save
       redirect_to camp_path(@camp), notice: "Successfully created camp."
     else
-      render :new, status: :unprocesabble_entity
+      render :new, status: :unprocessable_entity
     end
   end
 

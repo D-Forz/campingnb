@@ -1,9 +1,9 @@
 <div class="row justify-content-center">
-  <div class="col-10 align-self-center">
+  <div class="col-12 align-self-center">
     <div class="row row-cols-2 mt-3">
-      <div class="col-6">
-        <div style="width: 600px; height: 450px; background-color: #000000;" class="mt-2">
+      <div style="width: 100%; height: 450px; background-color: #000000;" class="m-3">
         </div>
+      <div class="col-7">
         <h2><%= @camp.name %></h2>
         <p><%= @camp.description %></p>
         <p><%= @camp.price %>€</p>
@@ -12,20 +12,31 @@
         <h3>Location</h3>
         <p><%= @camp.location %></p>
       </div>
-      <div class="col-4">
+      <div class="col-5">
         <span>Create Booking</span>
         <%= link_to "Book Now", new_camp_booking_path(@camp), class: 'btn btn-primary'%>
         <p>formulario para buscar fechas y llevar a la reserva</p>
       </div>
     </div>
     <div class="row mt-3">
-      <h2>Reviews</h2>
-      <% @camp.reviews.each do |review| %>
-        <p><%= review.content %></p>
-        <p><%= review.rating %></p>
+    <hr>
+      <h2>❤ <%= @camp.reviews.average(:rating) %> · <%= @camp.reviews.count %>
+      <%= 'review' if @camp.reviews.count == 1 %> <%= 'reviews' if @camp.reviews.count > 1 %></h2>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <% @camp.reviews.each do |review| %>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= review.user.full_name %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= review.created_at %></h6>
+              <p class="card-text"><%= review.content %></p>
+            </div>
+          </div>
+        </div>
       <% end %>
-
-      <% if policy(Review).create? %>
+      </div>
+    </div>
+      <% if user_signed_in? && current_user.booked?(@camp) %>
         <%= simple_form_for [ @camp, @review ] do |f| %>
           <%= f.input :content %>
           <%= f.input :rating %>

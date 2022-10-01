@@ -7,6 +7,6 @@ class ReviewPolicy < ApplicationPolicy
   end
 
   def create?
-    user.bookings.any?
+    true
   end
 end
