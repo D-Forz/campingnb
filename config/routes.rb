@@ -10,6 +10,6 @@ Rails.application.routes.draw do
     resources :reviews, only: :create
     resources :bookings, only: %i[new create show]
   end
+  resources :bookings, only: %i[index destroy]
   resources :reviews, only: :destroy
-  resources :bookings, only: :destroy
 end

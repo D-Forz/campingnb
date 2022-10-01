@@ -1,0 +1,21 @@
+<h1>Bookings</h1>
+<div class="col-12">
+  <div class="row row-cols-4 mt-3">
+    <% @bookings.each do |booking| %>
+      <div class="col">
+        <div class="card m-1" style="border-radius: 4%;">
+          <div class="card-body">
+            <ul class="list-inline d-flex justify-content-between">
+              <li class="list-inline-item card-title"><%= booking.camp.name %></li>
+              <li class="list-inline-item">❤ <%= booking.camp.reviews.average(:rating) %></li>
+            </ul>
+            <p class="card-text"><%= booking.start_date %> - <%= booking.end_date %></p>
+            <p class="card-text">$ COP noche</p>
+            <%= link_to 'See Details', camp_booking_path(booking.camp, booking), class: 'card-link text-center' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
