@@ -29,8 +29,9 @@ user2 = User.create!(
 
 p "User #{user2.email} created"
 
-1.upto(3) do |i|
-  file = File.open(Rails.root.join('app', 'assets', 'images', "camp#{i}.jpg"))
+20.times do |i|
+  randit = rand(1..3)
+  file = File.open(Rails.root.join('app', 'assets', 'images', "camp#{randit}.jpg"))
   camp = Camp.new(
     name: Faker::Restaurant.name,
     description: Faker::Restaurant.description,
