@@ -40,7 +40,7 @@ p "User #{user2.email} created"
     location: Faker::Address.city,
     price: Faker::Number.between(from: 20, to: 100),
     capacity: Faker::Number.between(from: 2, to: 8),
-    user: user1
+    user: [user1, user2].sample
   )
   camp.photos.attach(io: file, filename: "camp#{i}.jpg", content_type: 'image/jpg')
   camp.save!
