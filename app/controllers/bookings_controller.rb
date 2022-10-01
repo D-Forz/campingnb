@@ -1,6 +1,11 @@
 class BookingsController < ApplicationController
   before_action :set_camp, only: %i[new create show]
   before_action :set_booking, only: %i[show destroy]
+
+  def index
+    @bookings = policy_scope(Booking).order(created_at: :desc)
+  end
+
   def new
     @booking = Booking.new
     authorize @booking
