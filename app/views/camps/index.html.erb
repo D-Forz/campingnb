@@ -3,8 +3,8 @@
     <div class="row row-cols-4 mt-3">
       <% @camps.each do |camp| %>
         <div class="col">
-          <div class="card border-0 m-1" style="border-radius: 4%;">
-            <%= cl_image_tag camp.photos.first.key, class: "card-img-top", radius: 5, height: 200, width: 300, crop: :fill %>
+          <div class="card border-0">
+            <%= cl_image_tag camp.photos.first.key, class: "card-img-top", radius: 10, height: 200, width: 300, crop: :fill %>
             <div class="card-body">
               <ul class="list-inline d-flex justify-content-between">
                 <li class="list-inline-item card-title"><%= camp.name %></li>
