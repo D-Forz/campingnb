@@ -1,10 +1,13 @@
 // Specific CSS for your home-page
-.hero-banner {
-  border-radius: 10px;
-  background-color: white;
-  position: relative;
+
+#hero {
+  margin-top: 150px;
 }
-.link {
-  text-decoration: none;
-  color: white;
+
+#hero h1 {
+  color: #fff;
+}
+
+#hero p {
+  color: #fff;
 }
