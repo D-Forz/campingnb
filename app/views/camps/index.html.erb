@@ -1,32 +1,29 @@
-<div class="row justify-content-center">
-  <div class="col-12">
-    <div class="row row-cols-4 mt-3">
+<div class="container py-4 py-xl-5">
+    <div class="row mb-5">
+        <div class="col-md-8 col-xl-6 text-center mx-auto">
+            <h2>CAMPINGNB</h2>
+            <p class="w-lg-50">La mejor alternativa el momento de acampar.</p>
+        </div>
+    </div>
+    <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
       <% @camps.each do |camp| %>
         <div class="col">
-          <div class="card border-0 m-1" style="border-radius: 4%;">
-            <%= cl_image_tag camp.photos.first.key, class: "card-img-top", radius: 5, height: 200, width: 300, crop: :fill %>
-            <div class="card-body">
-              <ul class="list-inline d-flex justify-content-between">
-                <li class="list-inline-item card-title"><%= camp.name %></li>
-                <li class="list-inline-item">❤5</li>
-              </ul>
-              <p class="card-text"><%= camp.start_date %> - <%= camp.end_date %></p>
-              <p class="card-text">$<%= camp.price %> COP noche</p>
-              <%= link_to 'See Details', camp_path(camp), class: 'card-link text-center' %>
-              <% if policy(camp).update? %>
-                <%= link_to 'Edit', edit_camp_path(camp), class: 'card-link' %>
+            <div>
+            <%= link_to camp_path(camp) do %>
+              <%= cl_image_tag camp.photos.first.key, class: "rounded img-fluid d-block w-100 fit-cover", height: 200 %>
+                <div class="py-4">
+                  <ul class="list-inline d-flex justify-content-between">
+                    <li class="list-inline-item card-title"><h4><%= camp.name %></h4></li>
               <% end %>
-              <% if policy(camp).destroy? %>
-                <%= link_to 'Destroy', camp_path(camp),
-                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                class: 'card-link' %>
-              <% end %>
+                    <li class="list-inline-item">❤5</li>
+                  </ul>
+                    <p class="text-muted"><%= camp.start_date.to_fs(:short) %> - <%= camp.end_date.to_fs(:short) %></p>
+                    <p>$ <%= camp.price %> COP noche</p>
+                </div>
             </div>
-          </div>
         </div>
       <% end %>
     </div>
-  </div>
 </div>
 
 

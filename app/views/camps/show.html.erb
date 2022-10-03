@@ -14,8 +14,11 @@
       </div>
       <div class="col-5">
         <span>Create Booking</span>
-        <%= link_to "Book Now", new_camp_booking_path(@camp), class: 'btn btn-primary'%>
-        <p>formulario para buscar fechas y llevar a la reserva</p>
+          <% if policy(@camp).update? %>
+            <%= link_to 'Edit', edit_camp_path(@camp), class: 'card-link' %>
+          <% else %>
+            <%= link_to 'Book', new_camp_booking_path(@camp), class: 'card-link' %>
+          <% end %>
       </div>
     </div>
     <div class="row mt-3">
