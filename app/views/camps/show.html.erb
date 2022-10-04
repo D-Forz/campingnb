@@ -1,56 +1,121 @@
-<div class="row justify-content-center">
-  <div class="col-12 align-self-center">
-    <div class="row row-cols-2 mt-3">
-      <div style="width: 100%; height: 450px; background-color: #000000;" class="m-3">
+<div class="container" style="margin-top: 20px;margin-bottom: 20px;">
+    <div id="carousel-1" class="carousel slide" data-bs-ride="false">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+              <%= cl_image_tag @camp.photos.first.key, class: 'w-100 d-block', alt: 'Slide Image of the Camp' %>
+            </div>
+            <% @camp.photos.each do |photo| %>
+              <div class="carousel-item">
+                <%= cl_image_tag photo.key, class: 'w-100 d-block', alt: 'Slide Image of the Camp' %>
+              </div>
+            <% end %>
         </div>
-      <div class="col-7">
-        <h2><%= @camp.name %></h2>
-        <p><%= @camp.description %></p>
-        <p><%= @camp.price %>€</p>
-        <p><%= @camp.capacity %> places</p>
-        <hr>
-        <h3>Location</h3>
-        <p><%= @camp.location %></p>
-      </div>
-      <div class="col-5">
-        <span>Create Booking</span>
-          <% if policy(@camp).update? %>
-            <%= link_to 'Edit', edit_camp_path(@camp), class: 'card-link' %>
-          <% else %>
-            <%= link_to 'Book', new_camp_booking_path(@camp), class: 'card-link' %>
-          <% end %>
-      </div>
+        <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
+        <ol class="carousel-indicators">
+            <li class="active" data-bs-target="#carousel-1" data-bs-slide-to="0"></li>
+            <li data-bs-target="#carousel-1" data-bs-slide-to="1"></li>
+        </ol>
     </div>
-    <div class="row mt-3">
-    <hr>
-      <h2>❤ <%= @camp.reviews.average(:rating) %> · <%= @camp.reviews.count %>
-      <%= 'review' if @camp.reviews.count == 1 %> <%= 'reviews' if @camp.reviews.count > 1 %></h2>
-      <div class="row row-cols-1 row-cols-md-2 g-4">
-        <% @camp.reviews.each do |review| %>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title"><%= @camp.name %></h3>
+                    <h6 class="text-muted card-subtitle mb-2">Anfitrion: <%= @camp.user.full_name %></h6>
+                    <p class="card-text"><%= @camp.description %></p>
+                    <div class="col">
+                        <div class="d-flex justify-content-around">
+                            <div class="text-start px-3">
+                                <h4>Precio</h4>
+                                <p><%= @camp.price %>€</p>
+                            </div>
+                            <div class="text-start px-3">
+                                <h4>Huespedes</h4>
+                                <p><%= @camp.capacity %> places</p>
+                            </div>
+                            <div class="text-start px-3">
+                                <h4>Reseñas</h4>
+                                <% if @camp.reviews.count > 0 %>
+                                  <p>❤ <%= @camp.reviews.average(:rating).round(2) %> · <%= @camp.reviews.count %></p>
+                                <% else %>
+                                  <p>❤ <%= @camp.reviews.average(:rating) %> · <%= @camp.reviews.count %></p>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%= image_tag 'map.jpg', class: 'w-100', style: 'height: 400px' %>
+        </div>
+        <div class="col-md-4 card d-flex flex-column justify-content-around">
+            <div>
+                <h4 class="text-center">Book Now</h4>
+                <div class="input-group"><span class="input-group-text">Date</span><input class="form-control" type="text" /><button class="btn btn-primary" type="button">Book</button></div>
+            </div>
+            <div>
+                <h4 class="text-center">Recomendations</h4>
+                <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+            </div>
+            <div>
+                <h4 class="text-center">Comparte</h4>
+                <ul class="list-inline">
+                  <li class="list-inline-item me-4">
+                    <li class="fa-brands fa-facebook-f"></li>
+                  </li>
+                  <li class="list-inline-item me-4">
+                    <li class="fa-brands fa-twitter"></li>
+                  </li>
+                  <li class="list-inline-item me-4">
+                    <li class="fa-brands fa-instagram"></li>
+                  </li>
+                </ul>
+            </div>
+            <div>
+              <h4 class="text-center">Deja tu reseña</h4>
+              <div class="col py-3">
+            <%= simple_form_for [ @camp, @review ], wrapper: :input_group do |f| %>
+              <%= f.input :rating, label:false do %>
+                <%= f.input_field :rating, as: :select, collection: (1..5),
+                data: { controller: 'star-rating' } %>
+              <% end %>
+              <%= f.input :content, class:'form-control',
+              label:false, placeholder: 'Escribe tu reseña' %>
+              <%= f.button :submit, class: 'btn btn-primary', value: 'Comment' %>
+            <% end %>
+           <!-- <div class="input-group">
+              <span class="input-group-text">❤❤❤❤❤</span>
+              <input class="form-control" type="text" />
+              <button class="btn btn-primary" type="button">Comment</button>
+            </div> -->
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container py-4 py-xl-5">
+    <div class="row mb-5">
+      <h2 class="text-center">Reseñas</h2>
+    </div>
+    <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-lg-3">
+      <% @camp.reviews.each do |review| %>
         <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><%= review.user.full_name %></h5>
-              <h6 class="card-subtitle mb-2 text-muted"><%= review.created_at %></h6>
-              <p class="card-text"><%= review.content %></p>
-              <%= link_to "Delete", review_path(review),
-              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-              class: 'card-link' %>
+          <div>
+            <div class="d-flex justify-content-between bg-light border rounded border-0 border-light p-4">
+              <p class="flex-grow-1"><%= review.content %></p>
+              <p class="text-end"><%= "❤#{review.rating}" %></p>
+            </div>
+            <div class="d-flex">
+            <%= image_tag 'campingnb.ico', class: 'rounded-circle flex-shrink-0 me-3 fit-cover',
+            style: 'height: 50px; width: 50px;' %>
+              <div>
+                  <p class="fw-bold text-primary mb-0"><%= review.user.full_name %></p>
+                  <p class="text-muted mb-0"><%= review.created_at.to_fs(:long) %></p>
+              </div>
             </div>
           </div>
         </div>
       <% end %>
-      </div>
     </div>
-      <% if user_signed_in? && current_user.reviewed?(@camp) %>
-        <%= simple_form_for [ @camp, @review ] do |f| %>
-          <%= f.input :content %>
-          <%= f.input :rating %>
-          <%= f.button :submit %>
-        <% end %>
-      <% else %>
-        <p>Create a booking to leave a review</p>
-      <% end %>
-    </div>
-  </div>
 </div>
