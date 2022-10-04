@@ -1,16 +1,19 @@
 <section>
-  <div style="height: 600px;background: url(<%=asset_path('camp1.jpg')%>) center / cover;">
+  <div style="height: 600px;background: url(<%=asset_path('camp_home.jpg')%>) center / cover;">
     <div class="col-md-6 d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
-      <div id="hero" style="max-width: 350px;">
-          <h1 class="fw-bold">CAMPINGNB</h1>
-          <p class="my-3">
-            Dicen que el lugar más feliz del mundo es Disneyland, pero no es verdad. <br>Es un campamento.
-          </p>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit">Search</button>
-          </form>
-      </div>
+      <div id="hero" class="text-start d-flex flex-column justify-content-center align-items-center justify-content-xl-center align-items-xl-start justify-content-xxl-center" style="height: 600px; padding: 50px;">
+        <h1>Campingnb</h1>
+        <p>Dicen que el lugar más feliz del mundo es Disneyland, pero no es verdad. <br> Es un campamento.</p>
+        <div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center">
+          <%= form_with url: camps_path, method: :get do %>
+            <%= text_field_tag :query,
+              params[:query],
+              placeholder: "Find a Camp"
+            %>
+            <%= submit_tag "Search", class: "btn btn-primary", style: 'padding: 3px 8px;margin-left: 3px;' %>
+          <% end %>
+        </div>
+    </div>
     </div>
   </div>
   <div class="container h-100 position-relative" style="top: -50px;">
