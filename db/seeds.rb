@@ -45,6 +45,16 @@ p "User #{user2.email} created"
   camp.photos.attach(io: file, filename: "camp#{i}.jpg", content_type: 'image/jpg')
   camp.save!
   p "#{camp.name} has been added to the DB."
+
+  2.times do
+    review = Review.new(
+      rating: Faker::Number.between(from: 1, to: 5),
+      content: "This is a great campsite. I would definitely recommend it to anyone.",
+      camp: camp,
+      user: [user1, user2].sample
+    )
+    review.save!
+  end
 end
 
 p 'All records were created'

@@ -73,23 +73,25 @@
                 </ul>
             </div>
             <div>
-              <h4 class="text-center">Deja tu reseña</h4>
-              <div class="col py-3">
-            <%= simple_form_for [ @camp, @review ], wrapper: :input_group do |f| %>
-              <%= f.input :rating, label:false do %>
-                <%= f.input_field :rating, as: :select, collection: (1..5),
-                data: { controller: 'star-rating' } %>
-              <% end %>
-              <%= f.input :content, class:'form-control',
-              label:false, placeholder: 'Escribe tu reseña' %>
-              <%= f.button :submit, class: 'btn btn-primary', value: 'Comment' %>
-            <% end %>
+              <% if user_signed_in? && current_user.reviewed?(@camp) %>
+                <h4 class="text-center">Deja tu reseña</h4>
+                <div class="col py-3">
+                  <%= simple_form_for [ @camp, @review ], wrapper: :input_group do |f| %>
+                    <%= f.input :rating, label:false do %>
+                      <%= f.input_field :rating, as: :select, collection: (1..5),
+                      data: { controller: 'star-rating' } %>
+                    <% end %>
+                    <%= f.input :content, class:'form-control',
+                    label:false, placeholder: 'Escribe tu reseña' %>
+                    <%= f.button :submit, class: 'btn btn-primary', value: 'Comment' %>
+                  <% end %>
+                  </div>
+                <% end %>
            <!-- <div class="input-group">
               <span class="input-group-text">❤❤❤❤❤</span>
               <input class="form-control" type="text" />
               <button class="btn btn-primary" type="button">Comment</button>
             </div> -->
-        </div>
             </div>
         </div>
     </div>
