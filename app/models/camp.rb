@@ -3,7 +3,6 @@ class Camp < ApplicationRecord
 
   has_many :bookings, dependent: :destroy
   has_many :reviews, dependent: :destroy
-  has_many :bookmarks
   has_many_attached :photos
 
   validates :name, :location, :start_date, :end_date, presence: true

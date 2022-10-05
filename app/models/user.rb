@@ -6,7 +6,6 @@ class User < ApplicationRecord
 
   has_many :camps, dependent: :destroy
   has_many :bookings
-  has_many :bookmarks
   has_many :reviews, through: :camps
 
   def full_name
@@ -19,10 +18,6 @@ class User < ApplicationRecord
 
   def reviewed?(camp)
     camp.bookings.where(user: self).any? && camp.reviews.where(user: self).empty?
-  end
-
-  def bookmarked?(camp)
-    camp.bookmarks.where(user: self).any?
   end
 
   def booked?(camp)
