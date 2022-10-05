@@ -5,10 +5,14 @@
 
 .camp .camp-item {
   margin-bottom: 30px;
+  // shadow
+
 }
 
 
 .camp .camp-wrap {
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   transition: 0.3s;
   position: relative;
   overflow: hidden;
