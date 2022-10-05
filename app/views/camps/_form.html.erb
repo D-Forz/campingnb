@@ -1,11 +1,29 @@
-<%= simple_form_for @camp do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <%= f.input :start_date %>
-  <%= f.input :end_date %>
-  <%= f.input :location %>
-  <%= f.input :price %>
-  <%= f.input :capacity %>
-  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-  <%= f.button :submit %>
-<% end %>
+<div class="row justify-content-center m-3">
+  <div class="col-md-6">
+    <%= simple_form_for @camp do |f| %>
+      <%= f.input :name, label: "Nombre del campamento", placeholder: "Ej: Campamento de verano 2020" %>
+      <%= f.input :description, label: "Descripción del campamento", placeholder: "Ej: Campamento de verano para niños de 5 a 12 años" %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :start_date, as: :date, html5:true, input_html: { min: Date.today + 1.day }, label: "Fecha de inicio" %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :end_date, as: :date, html5:true, input_html: { min: Date.today + 2.day }, label: "Fecha de término" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <%= f.input :location, label: "Ubicación", placeholder: "Ej: Santiago" %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :price, label: "Precio", placeholder: "Ej: 10000" %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :capacity, label: "Capacidad", placeholder: "Ej: 50", hint: "Maximo 8 personas" %>
+        </div>
+      </div>
+      <%= f.input :photos, as: :file, input_html: { multiple: true }, label: "Fotos" %>
+      <%= f.button :submit, class: 'btn btn-outline-dark w-100 mb-3' %>
+    <% end %>
+  </div>
+</div>

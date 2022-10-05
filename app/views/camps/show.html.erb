@@ -17,28 +17,6 @@
     </button>
   </div>
 </div>
-
-<!--<div class="container my-3">
-  <div class="row">
-    <div id="carousel-1" class="carousel slide" data-bs-ride="false">
-        <div class="carousel-inner" style="max-height: 600px">
-            <div class="carousel-item active">
-              <%= cl_image_tag @camp.photos.first.key, class: 'w-100 d-block', alt: 'Slide Image of the Camp' %>
-            </div>
-            <% @camp.photos.each do |photo| %>
-              <div class="carousel-item">
-                <%= cl_image_tag photo.key, class: 'w-100 d-block', alt: 'Slide Image of the Camp' %>
-              </div>
-            <% end %>
-        </div>
-        <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
-        <ol class="carousel-indicators">
-            <li class="active" data-bs-target="#carousel-1" data-bs-slide-to="0"></li>
-            <li data-bs-target="#carousel-1" data-bs-slide-to="1"></li>
-        </ol>
-    </div>
-  </div>
-</div> -->
 <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -77,14 +55,8 @@
             <div class="mx-3">
               <h4 class="text-center">Reserva ahora</h4>
               <%= simple_form_for [@camp, @booking] do |f| %>
-                <%= f.input :start_date, label: false do %>
-                  <span class="input-group-text">From:</span>
-                  <%= f.input_field :start_date, class: 'form-control', html5: true %>
-                <% end %>
-                <%= f.input :end_date, label:false do %>
-                  <span class="input-group-text">To:</span>
-                  <%= f.input_field :end_date, class: 'form-control', html5: true %>
-                <% end %>
+                <%= f.input :start_date, label: false, html5: true, input_html: { min: @camp.start_date, max: @camp.end_date - 1.day } %>
+                <%= f.input :end_date, label:false, html5: true, input_html: { min: @camp.start_date + 1.day, max: @camp.end_date } %>
                 <%= f.button :submit, "Reservar", class: "btn btn-outline-dark w-100" %>
               <% end %>
                 <!--<h4 class="text-center">Book Now</h4>
