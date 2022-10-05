@@ -37,7 +37,7 @@ p "User #{user2.email} created"
     description: Faker::Restaurant.description,
     start_date: Faker::Date.between(from: Date.today, to: 2.days.from_now),
     end_date: Faker::Date.between(from: 8.days.from_now, to: 20.days.from_now + 1.days.from_now),
-    location: Faker::Address.city,
+    address: Faker::Address.country,
     price: Faker::Number.between(from: 20, to: 100),
     capacity: Faker::Number.between(from: 2, to: 8),
     user: [user1, user2].sample
@@ -46,9 +46,9 @@ p "User #{user2.email} created"
   camp.save!
   p "#{camp.name} has been added to the DB."
 
-  2.times do
+  7.times do
     review = Review.new(
-      rating: Faker::Number.between(from: 1, to: 5),
+      rating: Faker::Number.between(from: 3, to: 5),
       content: "This is a great campsite. I would definitely recommend it to anyone.",
       camp: camp,
       user: [user1, user2].sample

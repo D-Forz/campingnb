@@ -5,7 +5,7 @@ class Camp < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many_attached :photos
 
-  validates :name, :location, :start_date, :end_date, presence: true
+  validates :name, :address, :start_date, :end_date, presence: true
   validates :description, length: { minimum: 20 }, allow_blank: false
   validates :price, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :capacity, presence: true, numericality: { only_integer: true }, inclusion: { in: 1..10 }
@@ -13,6 +13,9 @@ class Camp < ApplicationRecord
   validate :start_date_cannot_be_in_the_past
   validate :end_date_cannot_be_before_start_date
   validate :images_type
+
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 
   private
 

@@ -2,7 +2,12 @@ class BookingPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
-      scope.where(user: user)
+      # Only show bookings for the current user if any
+      if user.bookings.any?
+        scope.where(user: user)
+      else
+        raise Pundit::NotAuthorizedError, "must have a booking to view"
+      end
     end
   end
 

@@ -5,7 +5,7 @@ class CreateCamps < ActiveRecord::Migration[7.0]
       t.text :description
       t.date :start_date
       t.date :end_date
-      t.string :location
+      t.string :address
       t.integer :price
       t.integer :capacity
       t.references :user, null: false, foreign_key: true

@@ -28,27 +28,28 @@
                     <p class="card-text"><%= @camp.description %></p>
                     <div class="col">
                         <div class="d-flex justify-content-around">
-                            <div class="text-start px-2">
-                                <h4>Precio</h4>
-                                <p><%= @camp.price %>€</p>
+                            <div class="text-center px-2">
+                                <h4>Ubicación</h4>
+                                <p><%= @camp.address %></p>
                             </div>
-                            <div class="text-start px-2">
+                            <div class="text-center px-2">
                                 <h4>Huespedes</h4>
                                 <p><%= @camp.capacity %> places</p>
                             </div>
-                            <div class="text-start px-2">
-                                <h4>Reseñas</h4>
-                                <% if @camp.reviews.count > 0 %>
-                                  <p>❤ <%= @camp.reviews.average(:rating).round(2) %> · <%= @camp.reviews.count %></p>
-                                <% else %>
-                                  <p>❤ <%= @camp.reviews.average(:rating) %> · <%= @camp.reviews.count %></p>
-                                <% end %>
+                            <div class="text-center px-2">
+                                <h4>precio</h4>
+                                <p><%= @camp.price %>€</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <%= image_tag 'map.jpg', class: 'w-100', style: 'height: 400px' %>
+            <!-- <%= image_tag 'map.jpg', class: 'w-100', style: 'height: 400px' %> -->
+          <div  id= 'map' style="width: 100%; height: 400px;"
+            data-controller="map"
+            data-map-markers-value="<%= @markers.to_json %>"
+            data-map-api-key-value=<%= ENV['MAPBOX_API_KEY'] %>>
+          </div>
         </div>
         <div class="col-md-4">
           <div class="card box">
