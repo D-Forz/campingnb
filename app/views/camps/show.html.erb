@@ -1,6 +1,7 @@
-<div class="container" style="margin-top: 20px;margin-bottom: 20px;">
+<div class="container my-3">
+  <div class="row">
     <div id="carousel-1" class="carousel slide" data-bs-ride="false">
-        <div class="carousel-inner">
+        <div class="carousel-inner" style="max-height: 600px">
             <div class="carousel-item active">
               <%= cl_image_tag @camp.photos.first.key, class: 'w-100 d-block', alt: 'Slide Image of the Camp' %>
             </div>
@@ -16,6 +17,7 @@
             <li data-bs-target="#carousel-1" data-bs-slide-to="1"></li>
         </ol>
     </div>
+  </div>
 </div>
 <div class="container">
     <div class="row">
@@ -23,7 +25,8 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title"><%= @camp.name %></h3>
-                    <h6 class="text-muted card-subtitle mb-2">Anfitrion: <%= @camp.user.full_name %></h6>
+                    <h6 class="text-muted card-subtitle mb-2">Anfitrion: <%= @camp.user.full_name %> |
+                    Avalaible from: <%= @camp.start_date.to_fs(:short) %> to: <%= @camp.end_date.to_fs(:long) %> </h6>
                     <p class="card-text"><%= @camp.description %></p>
                     <div class="col">
                         <div class="d-flex justify-content-around">
@@ -49,30 +52,43 @@
             </div>
             <%= image_tag 'map.jpg', class: 'w-100', style: 'height: 400px' %>
         </div>
-        <div class="col-md-4 card d-flex flex-column justify-content-around">
-            <div>
-                <h4 class="text-center">Book Now</h4>
-                <div class="input-group"><span class="input-group-text">Date</span><input class="form-control" type="text" /><button class="btn btn-primary" type="button">Book</button></div>
+        <div class="col-md-4">
+          <div class="card d-flex flex-column justify-content-around">
+            <div class="m-3">
+              <h4 class="text-center">Reserva ahora</h4>
+              <%= simple_form_for [@camp, @booking], wrapper: :input_group do |f| %>
+                <%= f.input :start_date, prepend: "From:", label:false, html5:true %>
+                <%= f.input :end_date, prepend: "To:", label:false, html5:true %>
+                <%= f.button :submit, "Reservar", class: "btn btn-outline-dark w-100" %>
+              <% end %>
+                <!--<h4 class="text-center">Book Now</h4>
+                <div class="input-group"><span class="input-group-text">From:</span><input class="form-control" type="Date" /><button class="btn btn-primary" type="button">Book</button></div>
+                <div class="input-group"><span class="input-group-text">To:</span><input class="form-control" type="Date" /><button class="btn btn-primary" type="button">Book</button></div>
+                -->
             </div>
-            <div>
-                <h4 class="text-center">Recomendations</h4>
-                <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+            <div class="mx-3">
+                <h4 class="text-center">Recomendaciones</h4>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-info text-center">Adquiera el calzado adecuado.</li>
+                    <li class="list-group-item list-group-item-info text-center">No cargue con exceso de equipación.</li>
+                    <li class="list-group-item list-group-item-info text-center">Llegue de día a la zona de acampada.</li>
+                </ul>
             </div>
-            <div>
-                <h4 class="text-center">Comparte</h4>
-                <ul class="list-inline">
-                  <li class="list-inline-item me-4">
+            <div class="m-2">
+                <h4 class="text-center my-2">Comparte</h4>
+                <ul class="list-inline d-flex justify-content-center">
+                  <li class="list-inline-item">
                     <li class="fa-brands fa-facebook-f"></li>
                   </li>
-                  <li class="list-inline-item me-4">
+                  <li class="list-inline-item">
                     <li class="fa-brands fa-twitter"></li>
                   </li>
-                  <li class="list-inline-item me-4">
+                  <li class="list-inline-item">
                     <li class="fa-brands fa-instagram"></li>
                   </li>
                 </ul>
             </div>
-            <div>
+            <div class="mx-3">
               <% if user_signed_in? && current_user.reviewed?(@camp) %>
                 <h4 class="text-center">Deja tu reseña</h4>
                 <div class="col py-3">
@@ -83,7 +99,7 @@
                     <% end %>
                     <%= f.input :content, class:'form-control',
                     label:false, placeholder: 'Escribe tu reseña' %>
-                    <%= f.button :submit, class: 'btn btn-primary', value: 'Comment' %>
+                    <%= f.button :submit, class: 'btn btn-outline-dark w-100', value: 'Comment' %>
                   <% end %>
                   </div>
                 <% end %>
@@ -92,6 +108,7 @@
               <input class="form-control" type="text" />
               <button class="btn btn-primary" type="button">Comment</button>
             </div> -->
+            </div>
             </div>
         </div>
     </div>
