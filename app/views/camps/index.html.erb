@@ -2,50 +2,27 @@
     <div class="row mb-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
             <h2>CAMPINGNB</h2>
-            <p class="w-lg-50">La mejor alternativa el momento de acampar.</p>
+            <p class="w-lg-50">La mejor alternativa al momento de acampar.</p>
         </div>
     </div>
-    <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-      <% @camps.each do |camp| %>
-        <div class="col">
-            <div>
+    <section id="camp" class="camp">
+      <div class="container">
+        <div class="row camp-container" data-aos-delay="200">
+          <% @camps.each do |camp| %>
+            <div class="col-lg-4 col-md-6 camp-item">
             <%= link_to camp_path(camp) do %>
-              <%= cl_image_tag camp.photos.first.key, class: "rounded img-fluid d-block w-100 fit-cover", height: 200 %>
-                <div class="py-4">
-                  <ul class="list-inline d-flex justify-content-between">
-                    <li class="list-inline-item card-title"><h4><%= camp.name %></h4></li>
-              <% end %>
-                    <li class="list-inline-item">❤5</li>
-                  </ul>
-                    <p class="text-muted"><%= camp.start_date.to_fs(:short) %> - <%= camp.end_date.to_fs(:short) %></p>
-                    <p>$ <%= camp.price %> COP noche</p>
+              <div class="camp-wrap">
+              <%= cl_image_tag camp.photos.first.key, class: "img-fluid" %>
+                <div class="camp-info">
+                  <h4><%= camp.name %></h4>
+                  <p><%= camp.start_date.to_fs(:short) %> - <%= camp.end_date.to_fs(:long) %></p>
+                  <span style="color:white;">$ <%= camp.price %> COP noche</span>
                 </div>
+              </div>
+            <% end %>
             </div>
+          <% end %>
         </div>
-      <% end %>
-    </div>
-</div>
-
-
- <%# @camp.photos.each do |photo| %>
-  <%#= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-<%# end %>
-
-<section id="camp" class="camp">
-  <div class="container">
-    <div class="row camp-container" data-aos-delay="200">
-      <div class="col-lg-4 col-md-6 camp-item filter-web">
-      <%= link_to camp_path(@camps.first) do %>
-        <div class="camp-wrap rounded-3">
-        <%= image_tag 'camp1.jpg', class: 'img-fluid' %>
-          <div class="camp-info">
-            <h4><%= @camps.first.name %></h4>
-            <p><%= @camps.first.start_date.to_fs(:short) %> - <%= @camps.first.end_date.to_fs(:long) %></p>
-            <span style="color:white;">$ <%= @camps.first.price %> COP noche</span>
-          </div>
-        </div>
-      <% end %>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+</div>
