@@ -1,22 +1,20 @@
 <div class="container my-3">
-  <div class="row">
-    <div id="carousel-1" class="carousel slide" data-bs-ride="false">
-        <div class="carousel-inner" style="max-height: 600px">
-            <div class="carousel-item active">
-              <%= cl_image_tag @camp.photos.first.key, class: 'w-100 d-block', alt: 'Slide Image of the Camp' %>
-            </div>
-            <% @camp.photos.each do |photo| %>
-              <div class="carousel-item">
-                <%= cl_image_tag photo.key, class: 'w-100 d-block', alt: 'Slide Image of the Camp' %>
-              </div>
-            <% end %>
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner" style="max-height: 600px">
+      <% @camp.photos.each do |photo| %>
+        <div class="carousel-item active">
+          <%= cl_image_tag photo.key, class: 'w-100 d-block img-fluid', alt: 'Slide Image of the Camp' %>
         </div>
-        <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
-        <ol class="carousel-indicators">
-            <li class="active" data-bs-target="#carousel-1" data-bs-slide-to="0"></li>
-            <li data-bs-target="#carousel-1" data-bs-slide-to="1"></li>
-        </ol>
+      <% end %>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
 </div>
 <div class="container">
@@ -30,15 +28,15 @@
                     <p class="card-text"><%= @camp.description %></p>
                     <div class="col">
                         <div class="d-flex justify-content-around">
-                            <div class="text-start px-3">
+                            <div class="text-start px-2">
                                 <h4>Precio</h4>
                                 <p><%= @camp.price %>€</p>
                             </div>
-                            <div class="text-start px-3">
+                            <div class="text-start px-2">
                                 <h4>Huespedes</h4>
                                 <p><%= @camp.capacity %> places</p>
                             </div>
-                            <div class="text-start px-3">
+                            <div class="text-start px-2">
                                 <h4>Reseñas</h4>
                                 <% if @camp.reviews.count > 0 %>
                                   <p>❤ <%= @camp.reviews.average(:rating).round(2) %> · <%= @camp.reviews.count %></p>
@@ -53,12 +51,12 @@
             <%= image_tag 'map.jpg', class: 'w-100', style: 'height: 400px' %>
         </div>
         <div class="col-md-4">
-          <div class="card d-flex flex-column justify-content-around">
-            <div class="m-3">
+          <div class="card box">
+            <div class="mx-3">
               <h4 class="text-center">Reserva ahora</h4>
-              <%= simple_form_for [@camp, @booking], wrapper: :input_group do |f| %>
-                <%= f.input :start_date, prepend: "From:", label:false, html5:true %>
-                <%= f.input :end_date, prepend: "To:", label:false, html5:true %>
+              <%= simple_form_for [@camp, @booking] do |f| %>
+                <%= f.input :start_date, label: false, html5: true, input_html: { min: @camp.start_date, max: @camp.end_date - 1.day } %>
+                <%= f.input :end_date, label:false, html5: true, input_html: { min: @camp.start_date + 1.day, max: @camp.end_date } %>
                 <%= f.button :submit, "Reservar", class: "btn btn-outline-dark w-100" %>
               <% end %>
                 <!--<h4 class="text-center">Book Now</h4>
@@ -91,7 +89,7 @@
             <div class="mx-3">
               <% if user_signed_in? && current_user.reviewed?(@camp) %>
                 <h4 class="text-center">Deja tu reseña</h4>
-                <div class="col py-3">
+                <div class="col py-2">
                   <%= simple_form_for [ @camp, @review ], wrapper: :input_group do |f| %>
                     <%= f.input :rating, label:false do %>
                       <%= f.input_field :rating, as: :select, collection: (1..5),
@@ -116,25 +114,34 @@
 <div class="container py-4 py-xl-5">
     <div class="row mb-5">
       <h2 class="text-center">Reseñas</h2>
+      <hr>
     </div>
-    <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-lg-3">
-      <% @camp.reviews.each do |review| %>
-        <div class="col">
-          <div>
-            <div class="d-flex justify-content-between bg-light border rounded border-0 border-light p-4">
-              <p class="flex-grow-1"><%= review.content %></p>
-              <p class="text-end"><%= "❤#{review.rating}" %></p>
-            </div>
-            <div class="d-flex">
-            <%= image_tag 'campingnb.ico', class: 'rounded-circle flex-shrink-0 me-3 fit-cover',
-            style: 'height: 50px; width: 50px;' %>
-              <div>
-                  <p class="fw-bold text-primary mb-0"><%= review.user.full_name %></p>
-                  <p class="text-muted mb-0"><%= review.created_at.to_fs(:long) %></p>
+    <% if @camp.reviews.count > 0 %>
+      <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-lg-3">
+        <% @camp.reviews.each do |review| %>
+          <div class="col">
+            <div>
+              <div class="d-flex justify-content-between bg-light border rounded border-0 border-light p-4">
+                <p class="flex-grow-1"><%= review.content %></p>
+                <p class="text-end"><%= "❤#{review.rating}" %></p>
+              </div>
+              <div class="d-flex">
+              <%= image_tag 'campingnb.ico', class: 'rounded-circle flex-shrink-0 me-3 fit-cover',
+              style: 'height: 50px; width: 50px;' %>
+                <div>
+                    <p class="fw-bold text-primary mb-0"><%= review.user.full_name %></p>
+                    <p class="text-muted mb-0"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</p>
+                </div>
               </div>
             </div>
           </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="row">
+        <div class="col">
+          <h4 class="text-center">Se el primero en compartir su experiencia sobre acampar en este lugar. <br>¡Reserva Ahora! ❤</h4>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
 </div>
