@@ -8,6 +8,14 @@ class CampsController < ApplicationController
   def show
     @review = Review.new
     @booking = Booking.new
+    if @camp.geocoded?
+      @markers = [{
+        lat: @camp.latitude,
+        lng: @camp.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { camp: @camp }),
+        image_url: helpers.asset_url('campingnb.ico')
+      }]
+    end
   end
 
   def new
@@ -52,7 +60,7 @@ class CampsController < ApplicationController
       :description,
       :start_date,
       :end_date,
-      :location,
+      :address,
       :price,
       :capacity,
       photos: []
