@@ -1,63 +1,29 @@
-<section>
-  <div class="row">
-      <div class="col-lg-7">
-        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <%= cl_image_tag 'camp1', class: 'd-block w-100' %>
-            </div>
-            <div class="carousel-item">
-              <%= cl_image_tag 'camp2', class: 'd-block w-100' %>
-            </div>
-            <div class="carousel-item">
-              <%= cl_image_tag 'camp3', class: 'd-block w-100' %>
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+<div style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url(<%=asset_path('camp2.jpg')%>)">
+  <div class="container">
+    <div class="row vh-100 align-items-center justify-content-center">
+      <div class="col-sm-8 col-md-6 col-lg-4 bg-white rounded p-4 shadow">
+        <div class="row justify-content-center mb-4">
+          <%= image_tag "campingnb.ico", class: "mt-4 w-25"%>
+        </div>
+        <div class="mb-4">
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: {turbo: false}) do |f| %>
+                <%= f.error_notification %>
+                  <%= f.input :first_name, autofocus: true %>
+                  <%= f.input :last_name %>
+                  <%= f.input :email,
+                              autofocus: true,
+                              input_html: { autocomplete: "email" }%>
+                  <%= f.input :password,
+                              hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                              input_html: { autocomplete: "new-password" } %>
+                  <%= f.input :password_confirmation,
+                              input_html: { autocomplete: "new-password" } %>
+                  <%= f.button :submit, "Sign up", class:"btn btn-outline-dark w-100" %>
+            <% end %>
+              <p class="text-center text-muted mt-3">Already have an account?</p>
+            <%= render "devise/shared/links" %>
         </div>
       </div>
-
-      <div class="mt-2 col-lg-5 d-flex flex-column min-vh-100">
-        <div class="rounded-3 w-100 ">
-          <h2 class="mb-4 w-100">Sign up</h2>
-          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name),
-          data: {turbo: false}) do |f| %>
-            <div class="mb-3">
-              <%= f.error_notification %>
-              <div class="form-inputs">
-                <%= f.input :first_name, required: true, autofocus: true %>
-                <%= f.input :last_name, required: true %>
-                <%= f.input :email,
-                            required: true,
-                            autofocus: true,
-                            input_html: { autocomplete: "email" }%>
-                <%= f.input :password,
-                            required: true,
-                            hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                            input_html: { autocomplete: "new-password" } %>
-                <%= f.input :password_confirmation,
-                            required: true,
-                            input_html: { autocomplete: "new-password" } %>
-              </div>
-              <div class="form-actions w-100 btn btn-outline-danger btn-sm mb-2">
-                <%= f.button :submit, "Sign up" %>
-              </div>
-            </div>
-          <% end %>
-            <div class="">
-              <p class="text-center text muted">Already have an account?</p>
-              <div class="form-actions w-100 text-muted text-decoration-none">
-                <%= render "devise/shared/links" %>
-              </div>
-            </div>
-        </div>
-      </div>
+    </div>
   </div>
-</section>
+</div>
