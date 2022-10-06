@@ -3,6 +3,7 @@ class CampsController < ApplicationController
   before_action :set_camp, except: %i[index new create my_camps]
   def index
     @camps = policy_scope(Camp).with_attached_photos
+    @pagy, @camps = pagy(@camps, items: 12)
   end
 
   def show

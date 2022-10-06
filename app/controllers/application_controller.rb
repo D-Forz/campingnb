@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-
+  include Pagy::Backend
   include Pundit::Authorization
 
   # Pundit: allow-list approach
