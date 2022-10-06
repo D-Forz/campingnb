@@ -1,21 +1,22 @@
 class CampsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
-  before_action :set_camp, except: %i[index new create]
+  before_action :set_camp, except: %i[index new create my_camps]
   def index
-    @camps = policy_scope(Camp)
+    @camps = policy_scope(Camp).with_attached_photos
+    @pagy, @camps = pagy(@camps, items: 12)
   end
 
   def show
     @review = Review.new
     @booking = Booking.new
-    if @camp.geocoded?
-      @markers = [{
-        lat: @camp.latitude,
-        lng: @camp.longitude,
-        info_window: render_to_string(partial: "info_window", locals: { camp: @camp }),
-        image_url: helpers.asset_url('campingnb.ico')
-      }]
-    end
+    return unless @camp.geocoded?
+
+    @markers = [{
+      lat: @camp.latitude,
+      lng: @camp.longitude,
+      info_window: render_to_string(partial: "info_window", locals: { camp: @camp }),
+      image_url: helpers.asset_url('campingnb.ico')
+    }]
   end
 
   def new
@@ -45,6 +46,11 @@ class CampsController < ApplicationController
   def destroy
     @camp.destroy
     redirect_to camps_path, status: :see_other
+  end
+
+  def my_camps
+    @camps = current_user.camps
+    authorize @camps
   end
 
   private

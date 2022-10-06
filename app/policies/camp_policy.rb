@@ -22,6 +22,10 @@ class CampPolicy < ApplicationPolicy
     user_is_owner?
   end
 
+  def my_camps?
+    user.camps.any?
+  end
+
   private
 
   def user_is_owner?

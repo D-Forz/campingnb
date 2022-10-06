@@ -3,6 +3,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
 
+# Project aditional gems
+gem 'devise'
+gem 'faker'
+gem 'pundit'
+gem 'cloudinary'
+gem 'geocoder'
+gem "pagy", "~> 5.10"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
 
@@ -76,9 +84,3 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
-
-gem 'devise'
-gem 'faker'
-gem 'pundit'
-gem 'cloudinary'
-gem 'geocoder'

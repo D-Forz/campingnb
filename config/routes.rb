@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :camps do
     resources :reviews, only: :create
     resources :bookings, only: %i[create]
+    collection do
+      get "my_camps"
+    end
   end
   resources :bookings, only: %i[index destroy]
   resources :reviews, only: :destroy
