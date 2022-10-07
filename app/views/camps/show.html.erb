@@ -92,7 +92,7 @@
           <% if user_signed_in? && current_user.reviewed?(@camp) %>
             <h4 class="text-center">Leave your review</h4>
             <div class="col py-2">
-              <%= simple_form_for [ @camp, @review ], wrapper: :input_group do |f| %>
+              <%= simple_form_for [ @camp, @review ] do |f| %>
                 <%= f.input :rating, label:false do %>
                   <%= f.input_field :rating, as: :select, collection: (1..5),
                   data: { controller: 'star-rating' } %>
