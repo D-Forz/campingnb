@@ -14,7 +14,7 @@
               <div class="camp-wrap">
               <%= cl_image_tag camp.photos.first.key, class: "img-fluid" %>
                 <div class="camp-info">
-                  <h4><%= camp.name %></h4>
+                  <h4><%= camp.address %></h4>
                   <% if camp.reviews.count > 0 %>
                       <span style="color:floralwhite;">❤ <%= camp.reviews.average(:rating).floor(2) %> </span>
                   <% else %>
