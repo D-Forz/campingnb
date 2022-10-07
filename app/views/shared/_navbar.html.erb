@@ -7,32 +7,45 @@
           <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
         </button>
         <div id="navcol-5" class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
-              <% if user_signed_in? %>
-              <!--My Bookings if the user have any booking -->
+          <!-- Items Navbar -->
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <!-- search bar -->
+                <%= form_with url: camps_path, method: :get do %>
+                  <%= text_field_tag :query,
+                    params[:query],
+                    placeholder: "Find a Camp"
+                  %>
+                  <%= submit_tag "Search", class: "btn btn-primary", style: 'padding: 3px 8px;margin-left: 3px;' %>
+                <% end %>
+                <!-- search bar end -->
+              </li>
+            <% if user_signed_in? %>
+            <!--My Bookings if the user have any booking -->
               <% if current_user.bookings.any? %>
                 <li class="nav-item"><%= link_to "My Bookings", bookings_path, class: "nav-link" %></li>
               <% end %>
-                <li class="nav-item">
-                  <%= link_to "Camps", camps_path, class: "nav-link" %>
-                </li>
-                <% if policy(Camp).my_camps? %>
-                <li class="nav-item">
-                  <%= link_to "My Camps", my_camps_path, class: "nav-link" %>
-                </li>
-                <% end %>
-                <li class="nav-item">
-                  <%= link_to "Logout", destroy_user_session_path, data: {turbo_method: :delete}, class: "nav-link" %>
-                </li>
-              <% else %>
-                <li class="nav-item">
-                  <%= link_to "Camps", camps_path, class: "nav-link" %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "Sign In", new_user_session_path, class: "nav-link active" %>
-                </li>
-            </ul>
+              <li class="nav-item">
+                <%= link_to "Camps", camps_path, class: "nav-link" %>
+              </li>
+              <% if policy(Camp).my_camps? %>
+              <li class="nav-item">
+                <%= link_to "My Camps", my_camps_path, class: "nav-link" %>
+              </li>
               <% end %>
+              <li class="nav-item">
+                <%= link_to "Logout", destroy_user_session_path, data: {turbo_method: :delete}, class: "nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Camps", camps_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Sign In", new_user_session_path, class: "nav-link active" %>
+              </li>
+              <% end %>
+          </ul>
+          <!-- Items Navbar end -->
         </div>
     </div>
 </nav>
