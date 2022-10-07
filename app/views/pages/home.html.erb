@@ -3,7 +3,7 @@
     <div class="col-md-6 d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
       <div id="hero" class="text-start d-flex flex-column justify-content-center align-items-center justify-content-xl-center align-items-xl-start justify-content-xxl-center" style="height: 600px; padding: 50px;">
         <h1>Campingnb</h1>
-        <p>Dicen que el lugar más feliz del mundo es Disneyland, pero no es verdad. <br> Es un campamento.</p>
+        <p>They say the happiest place in the world is Disneyland, but it's not true. <br> It is a camp.</p>
         <div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center">
           <%= form_with url: camps_path, method: :get do %>
             <%= text_field_tag :query,
@@ -21,9 +21,16 @@
           <div class="col">
             <div class="card">
                 <div class="card-body pt-5 p-4">
-                    <h4 class="card-title">Title</h4>
-                    <h6 class="text-muted card-subtitle mb-2">Sincroniza tus ciclos de sueño</h6>
-                    <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+                    <h4 class="card-title">Benefits of camping</h4>
+                    <h6 class="text-muted card-subtitle mb-2">Everything for your wellbeing</h6>
+                    <p class="card-text">
+                      <ul>
+                        <li>Synchronize your sleep cycles</li>
+                        <li>Improves your mental health</li>
+                        <li>Improves your spiritual health</li>
+                        <li>Reduce your symptoms of depression</li>
+                      </ul>
+                    </p>
                 </div>
                 <div class="card-footer p-4 py-3">
                   <a href="#">Lear more →</a>
@@ -33,24 +40,24 @@
           <div class="col">
             <div class="card">
                 <div class="card-body pt-5 p-4">
-                    <h4 class="card-title">Title</h4>
-                    <h6 class="text-muted card-subtitle mb-2">Reduce tus sintomas de depresión</h6>
-                    <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+                    <h4 class="card-title">Camps</h4>
+                    <h6 class="text-muted card-subtitle mb-2">Find your ideal place</h6>
+                    <p class="card-text">In our campsites you will find the best camping experience.</p>
                 </div>
                 <div class="card-footer p-4 py-3">
-                  <a href="#">Lear more →</a>
+                  <%= link_to "Find a Camp", camps_path %>
                 </div>
             </div>
           </div>
           <div class="col">
             <div class="card rounded-3">
                 <div class="card-body pt-5 p-4">
-                  <h4 class="card-title">Title</h4>
-                  <h6 class="text-muted card-subtitle mb-2">Minimiza tus pensamientos negativos</h6>
-                  <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+                  <h4 class="card-title">Add your Camp</h4>
+                  <h6 class="text-muted card-subtitle mb-2">Grow your business</h6>
+                  <p class="card-text">At Campingnb you can rent your spaces at no cost.</p>
                 </div>
                 <div class="card-footer p-4 py-3">
-                  <a href="#">Lear more →</a>
+                  <%= link_to "Add a Camp", new_camp_path %>
                 </div>
             </div>
           </div>
@@ -60,7 +67,7 @@
 <div class="container py-4 py-xl-5">
   <div class="row mb-5">
       <div class="col-md-8 col-xl-6 text-center mx-auto">
-          <h2>Testimonios</h2>
+          <h2>Testimonials</h2>
       </div>
   </div>
   <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-lg-3">
