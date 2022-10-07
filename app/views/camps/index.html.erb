@@ -2,7 +2,7 @@
     <div class="row mb-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
             <h2>CAMPINGNB</h2>
-            <p class="w-lg-50">La mejor alternativa al momento de acampar.</p>
+            <p class="w-lg-50">THE FOREST ARE CALLING.</p>
         </div>
     </div>
     <section id="camp" class="camp">
@@ -15,6 +15,11 @@
               <%= cl_image_tag camp.photos.first.key, class: "img-fluid" %>
                 <div class="camp-info">
                   <h4><%= camp.name %></h4>
+                  <% if camp.reviews.count > 0 %>
+                      <span style="color:floralwhite;">❤ <%= camp.reviews.average(:rating).floor(2) %> </span>
+                  <% else %>
+                      <span style="color:floralwhite;">❤ <%= camp.reviews.average(:rating) %> </span>
+                  <% end %>
                   <p><%= camp.start_date.to_fs(:short) %> - <%= camp.end_date.to_fs(:long) %></p>
                   <span style="color:white;">$ <%= camp.price %> COP noche</span>
                 </div>
