@@ -63,7 +63,7 @@
           <%= simple_form_for [@camp, @booking] do |f| %>
             <%= f.input :start_date, label: false, html5: true, input_html: { min: @camp.start_date, max: @camp.end_date - 1.day } %>
             <%= f.input :end_date, label:false, html5: true, input_html: { min: @camp.start_date + 1.day, max: @camp.end_date } %>
-            <%= f.button :submit, "Reservar", class: "btn btn-outline-dark w-100" %>
+            <%= f.button :submit, "Book", class: "btn btn-outline-dark w-100" %>
           <% end %>
         </div>
         <div class="mx-3">
@@ -98,7 +98,7 @@
                   data: { controller: 'star-rating' } %>
                 <% end %>
                 <%= f.input :content, class:'form-control',
-                label:false, placeholder: 'Escribe tu reseña' %>
+                label:false, placeholder: 'Write your review' %>
                 <%= f.button :submit, class: 'btn btn-outline-dark w-100', value: 'Comment' %>
               <% end %>
               </div>
@@ -125,7 +125,7 @@
     <% else %>
       <div class="row">
         <div class="col">
-          <h4 class="text-center">Be the first to share your experience about camping in this place.. <br>Book now! ❤</h4>
+          <h4 class="text-center">Be the first to share your experience about camping in this place.<br>Book now! ❤</h4>
         </div>
       </div>
     <% end %>
