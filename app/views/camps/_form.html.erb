@@ -2,7 +2,7 @@
   <div class="col-md-6">
     <%= simple_form_for @camp do |f| %>
       <%= f.input :name, label: "Name of the camp", placeholder: "Ex: Summer Camp 2020" %>
-      <%= f.input :description, label: "Camp Description", placeholder: "Ex: Summer camp for children from 5 to 12 years old" %>
+      <%= f.input :description, label: "Camp Description",placeholder: "Ex: Summer camp for children from 5 to 12 years old" %>
       <div class="row">
         <div class="col-md-6">
           <%= f.input :start_date, as: :date, html5:true, input_html: { min: Date.today + 1.day }, label: "Start date" %>
