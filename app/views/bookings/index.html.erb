@@ -17,9 +17,12 @@
               </ul>
               <span class="card-text">
                 <strong>Reservation details:</strong>
-                <br>from: <%= booking.start_date.to_fs(:long) %> - to: <%= booking.end_date.to_fs(:long) %>
-                <br>total price: $ <%= (booking.camp.price * (booking.end_date - booking.start_date).floor) %> COP
               </span>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Start date: <%= booking.start_date.to_fs(:long) %> </li>
+                <li class="list-group-item">End date: <%= booking.end_date.to_fs(:long) %></li>
+                <li class="list-group-item"><strong>Total price: <%= (booking.camp.price * (booking.end_date - booking.start_date).floor) %></strong></li>
+              </ul>
               <div class="d-flex justify-content-between align-items-center mt-2">
                 <div class="btn-group">
                   <%= link_to 'View Camp', camp_path(booking.camp), class: 'btn btn-sm btn-outline-secondary' %>
