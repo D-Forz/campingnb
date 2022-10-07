@@ -1,15 +1,17 @@
 <div class="col">
-  <div>
-    <div class="d-flex justify-content-between bg-light border rounded border-0 border-light p-4">
-      <p class="flex-grow-1"><%= review.content %></p>
-      <p class="text-nowrap"><%= "❤ #{review.rating}" %></p>
-    </div>
-    <div class="d-flex">
-    <%= image_tag 'campingnb.ico', class: 'rounded-circle flex-shrink-0 me-3 mt-1 fit-cover',
-    style: 'height: 40px; width: 40px;' %>
-      <div>
-          <p class="fw-bold text-primary mb-0"><%= review.user.full_name %></p>
-          <p class="text-muted mb-0"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</p>
+  <div class="shadow-sm" style="border-radius:5px;">
+    <div class="container pt-3">
+      <div class="d-flex">
+        <%= image_tag 'campingnb.ico', class: 'rounded-circle flex-shrink-0 me-3 mt-1 fit-cover',
+        style: 'height: 40px; width: 40px;' %>
+        <div>
+            <p class="fw-bold text-dark mb-0"><%= review.user.full_name %></p>
+            <p class="text-muted fs-6"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</p>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between text-secondary px-3">
+        <p class="flex-grow-1"><%= review.content %></p>
+        <p class="text-nowrap"><%= "❤ #{review.rating}" %></p>
       </div>
     </div>
   </div>
