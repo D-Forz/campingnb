@@ -11,50 +11,55 @@ User.delete_all
 Camp.delete_all
 Booking.delete_all
 
-user1 = User.create!(
+User.create!(
   first_name: "juan",
   last_name: "perez",
-  email: "juancho@gmail.com",
+  email: "juan@gmail.com",
   password: 204_060
 )
 
-p "User #{user1.email} created"
+p 'Creating users...'
 
-user2 = User.create!(
-  first_name: "jose",
-  last_name: "perez",
-  email: "jospe@gmail.com",
-  password: 204_060
-)
-
-p "User #{user2.email} created"
-
-20.times do |i|
-  randit = rand(1..3)
-  file = File.open(Rails.root.join('app', 'assets', 'images', "camp#{randit}.jpg"))
-  camp = Camp.new(
-    name: Faker::Restaurant.name,
-    description: Faker::Restaurant.description,
-    start_date: Faker::Date.between(from: Date.today, to: 2.days.from_now),
-    end_date: Faker::Date.between(from: 8.days.from_now, to: 20.days.from_now + 1.days.from_now),
-    address: Faker::Address.country,
-    price: Faker::Number.between(from: 20, to: 100),
-    capacity: Faker::Number.between(from: 2, to: 8),
-    user: [user1, user2].sample
-  )
-  camp.photos.attach(io: file, filename: "camp#{i}.jpg", content_type: 'image/jpg')
-  camp.save!
-  p "#{camp.name} has been added to the DB."
-
-  7.times do
-    review = Review.new(
-      rating: Faker::Number.between(from: 3, to: 5),
-      content: "This is a great campsite. I would definitely recommend it to anyone.",
-      camp: camp,
-      user: [user1, user2].sample
+def create_users
+  10.times do
+    user = User.create!(
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: Faker::Internet.email,
+      password: 204_060
     )
-    review.save!
+    p "#{user.first_name} has been added to the DB."
+    create_camps(user)
   end
 end
 
+def create_camps(user)
+  3.times do |i|
+    file = File.open(Rails.root.join('app', 'assets', 'images', "camp#{rand(1..3)}.jpg"))
+    camp = Camp.new(
+      name: Faker::Restaurant.name,
+      description: Faker::Restaurant.description[100..400],
+      start_date: Faker::Date.between(from: Date.today, to: 2.days.from_now),
+      end_date: Faker::Date.between(from: 15.days.from_now, to: 45.days.from_now),
+      address: Faker::Address.country,
+      price: Faker::Number.between(from: 2000, to: 10_000),
+      capacity: Faker::Number.between(from: 2, to: 10),
+      user:
+    )
+    camp.photos.attach(io: file, filename: "camp#{i}.jpg", content_type: 'image/jpg')
+    camp.save!
+    p "#{camp.name} has been added to the DB."
+
+    3.times do
+      Review.create!(
+        content: Faker::Restaurant.review[0..79],
+        rating: Faker::Number.between(from: 4, to: 5),
+        camp:,
+        user:
+      )
+    end
+  end
+end
+
+create_users
 p 'All records were created'
