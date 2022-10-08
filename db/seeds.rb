@@ -52,7 +52,7 @@ def create_camps(user)
 
     3.times do
       Review.create!(
-        content: Faker::Restaurant.review[0..80],
+        content: Faker::Restaurant.review[0..79],
         rating: Faker::Number.between(from: 4, to: 5),
         camp:,
         user:

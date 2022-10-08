@@ -1,61 +1,66 @@
 <section>
   <div style="height: 600px;background: url(<%=asset_path('camp_home.jpg')%>) center / cover;">
-      <div id="hero" class="text-center d-flex flex-column justify-content-center align-items-center" style="height: 600px; padding: 50px;">
+      <div id="hero" class="text-center d-flex flex-column justify-content-center align-items-center" style="height: 600px;">
         <h1>Campingnb</h1>
         <p>They say the happiest place in the world is Disneyland, but it's not true. <br> It is a camp.</p>
-        <div class="d-flex justify-content-center align-items-center">
-          <%= form_with url: camps_path, method: :get do %>
-            <%= text_field_tag :query,
-              params[:query],
-              placeholder: "Find a Camp"
-            %>
-            <%= submit_tag "Search", class: "btn btn-primary", style: 'padding: 3px 8px;margin-left: 3px;' %>
-          <% end %>
-        </div>
-    </div>
+      </div>
   </div>
   <div class="container h-100 position-relative" style="top: -50px;">
       <div class="row gy-5 gy-lg-0 row-cols-1 row-cols-md-2 row-cols-lg-3">
           <div class="col">
-            <div class="card">
-                <div class="card-body pt-5 p-4">
-                    <h4 class="card-title">Benefits of camping</h4>
-                    <h6 class="text-muted card-subtitle mb-2">Everything for your wellbeing</h6>
+            <div class="card h-100">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Benefits of camping</h4>
+                    <h6 class="text-muted card-subtitle mb-2 text-center">Everything for your wellbeing</h6>
                     <p class="card-text">
-                      <ul>
-                        <li>Synchronize your sleep cycles</li>
-                        <li>Improves your mental health</li>
-                        <li>Improves your spiritual health</li>
-                        <li>Reduce your symptoms of depression</li>
+                      <ul class="list-group list-group-flush text-center">
+                        <li class="list-group-item">Synchronize your sleep cycles</li>
+                        <li class="list-group-item">Improves your mental health</li>
+                        <li class="list-group-item">Reduce your symptoms of depression</li>
                       </ul>
                     </p>
                 </div>
                 <div class="card-footer p-4 py-3">
-                  <a href="#">Lear more →</a>
+                  <a href="https://koa.com/blog/the-benefits-of-camping-why-camping-is-good-for-you/" class="link-dark" target="_blank">Lear more →</a>
                 </div>
             </div>
           </div>
           <div class="col">
-            <div class="card">
-                <div class="card-body pt-5 p-4">
-                    <h4 class="card-title">Camps</h4>
-                    <h6 class="text-muted card-subtitle mb-2">Find your ideal place</h6>
-                    <p class="card-text">In our campsites you will find the best camping experience.</p>
+            <div class="card h-100">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Camps</h4>
+                    <h6 class="text-muted card-subtitle mb-2 text-center">Find your ideal place</h6>
+                    <p class="card-text text-center">
+                      <ul class="list-group list-group-flush mt-0 text-center">
+                        <li class="list-group-item">
+                          In our campsites you will find the best camping experience.
+                        </li>
+                        <li class="list-group-item">
+                          We have the best campsites in the world.
+                        </li>
+                      </ul>
+                    </p>
                 </div>
                 <div class="card-footer p-4 py-3">
-                  <%= link_to "Find a Camp", camps_path %>
+                  <%= link_to "Find a Camp →", camps_path, class:'link-dark' %>
                 </div>
             </div>
           </div>
           <div class="col">
-            <div class="card rounded-3">
-                <div class="card-body pt-5 p-4">
-                  <h4 class="card-title">Add your Camp</h4>
-                  <h6 class="text-muted card-subtitle mb-2">Grow your business</h6>
-                  <p class="card-text">At Campingnb you can rent your spaces at no cost.</p>
+            <div class="card h-100 d-flex justify-content-center">
+                <div class="card-body">
+                  <h4 class="card-title text-center">Add your Camp</h4>
+                  <h6 class="text-muted card-subtitle mb-2 text-center">Grow your business</h6>
+                  <p class="card-text">
+                    <ul class="list-group list-group-flush text-center">
+                      <li class="list-group-item">Add your camp to our website</li>
+                      <li class="list-group-item">Get more customers</li>
+                      <li class="list-group-item">Grow your business</li>
+                    </ul>
+                  </p>
                 </div>
                 <div class="card-footer p-4 py-3">
-                  <%= link_to "Add a Camp", new_camp_path %>
+                  <%= link_to "Add a Camp →", new_camp_path, class:'link-dark' %>
                 </div>
             </div>
           </div>
