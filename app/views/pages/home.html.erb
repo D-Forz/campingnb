@@ -6,10 +6,7 @@
         <p>They say the happiest place in the world is Disneyland, but it's not true. <br> It is a camp.</p>
         <div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center">
           <%= form_with url: camps_path, method: :get do %>
-            <%= text_field_tag :query,
-              params[:query],
-              placeholder: "Find a Camp"
-            %>
+            <%= text_field_tag :query, params[:query], placeholder: "Find a Camp" %>
             <%= submit_tag "Search", class: "btn btn-primary", style: 'padding: 3px 8px;margin-left: 3px;' %>
           <% end %>
         </div>
@@ -64,6 +61,29 @@
       </div>
   </div>
 </section>
+<!--Eventos start -->
+
+<section class="eventos">
+  <div class="title">
+    <h1>Upcoming Events</h1>
+  </div>
+  <div class="fila">
+    <div class="columna">
+      <img src="#" alt="primeraImagen" stlye="background: url(<%=asset_path('primeraImagen.jpg')%>)">
+      <h4>Everest Camp Trek</h4>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt atque deleniti non cupiditate, obcaecati amet at voluptatum neque nulla laudantium ea sit aspernatur recusandae repellat natus, velit perspiciatis odit officiis!</p>
+      <a href="#" class="ctn">Learn More</a>
+    </div>
+        <div class="columna">
+      <img src="#" alt="segundaImagen" stlye="background: url(<%=asset_path('segundaImagen.jpg')%>)">
+      <h4>Walking holidays</h4>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt atque deleniti non cupiditate, obcaecati amet at voluptatum neque nulla laudantium ea sit aspernatur recusandae repellat natus, velit perspiciatis odit officiis!</p>
+      <a href="#" class="ctn">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!--Eventos end -->
 <div class="container py-4 py-xl-5">
   <div class="row mb-5">
       <div class="col-md-8 col-xl-6 text-center mx-auto">

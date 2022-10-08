@@ -12,11 +12,8 @@
             <li class="nav-item">
                 <!-- search bar -->
                 <%= form_with url: camps_path, method: :get do %>
-                  <%= text_field_tag :query,
-                    params[:query],
-                    placeholder: "Find a Camp"
-                  %>
-                  <%= submit_tag "Search", class: "btn btn-primary", style: 'padding: 3px 8px;margin-left: 3px;' %>
+                  <%= text_field_tag :query, params[:query], placeholder: "Find a Camp", class: "align-items-center justify-content-center"%>
+                  <%= submit_tag "Search", class: " btn btn-primary", style: 'padding: 3px 8px;margin-left: 3px;' %>
                 <% end %>
                 <!-- search bar end -->
               </li>
