@@ -8,9 +8,9 @@
   <div class="container h-100 position-relative" style="top: -50px;">
       <div class="row gy-5 gy-lg-0 row-cols-1 row-cols-md-2 row-cols-lg-3">
           <div class="col">
-            <div class="card h-100">
+            <div class="card h-100 shadow">
                 <div class="card-body">
-                    <h4 class="card-title text-center">Benefits of camping</h4>
+                    <h4 class="card-title text-center mt-3 fw-bold ">Camping Benefits</h4>
                     <h6 class="text-muted card-subtitle mb-2 text-center">Everything for your wellbeing</h6>
                     <p class="card-text">
                       <ul class="list-group list-group-flush text-center">
@@ -20,15 +20,15 @@
                       </ul>
                     </p>
                 </div>
-                <div class="card-footer p-4 py-3">
-                  <a href="https://koa.com/blog/the-benefits-of-camping-why-camping-is-good-for-you/" class="link-dark" target="_blank">Lear more →</a>
+                <div class="card-footer p-4 py-3 text-center">
+                  <a href="https://koa.com/blog/the-benefits-of-camping-why-camping-is-good-for-you/" class="btn btn-light" target="_blank">Learn more →</a>
                 </div>
             </div>
           </div>
           <div class="col">
-            <div class="card h-100">
+            <div class="card h-100 shadow">
                 <div class="card-body">
-                    <h4 class="card-title text-center">Camps</h4>
+                    <h4 class="card-title text-center mt-3 fw-bold">Camps</h4>
                     <h6 class="text-muted card-subtitle mb-2 text-center">Find your ideal place</h6>
                     <p class="card-text text-center">
                       <ul class="list-group list-group-flush mt-0 text-center">
@@ -41,15 +41,15 @@
                       </ul>
                     </p>
                 </div>
-                <div class="card-footer p-4 py-3">
-                  <%= link_to "Find a Camp →", camps_path, class:'link-dark' %>
+                <div class="card-footer p-4 py-3 text-center">
+                  <%= link_to "Find a Camp →", camps_path, class:'btn btn-light' %>
                 </div>
             </div>
           </div>
           <div class="col">
-            <div class="card h-100 d-flex justify-content-center">
+            <div class="card h-100 d-flex justify-content-center shadow">
                 <div class="card-body">
-                  <h4 class="card-title text-center">Add your Camp</h4>
+                  <h4 class="card-title text-center mt-3 fw-bold">Add your Camp</h4>
                   <h6 class="text-muted card-subtitle mb-2 text-center">Grow your business</h6>
                   <p class="card-text">
                     <ul class="list-group list-group-flush text-center">
@@ -59,14 +59,23 @@
                     </ul>
                   </p>
                 </div>
-                <div class="card-footer p-4 py-3">
-                  <%= link_to "Add a Camp →", new_camp_path, class:'link-dark' %>
+                <div class="card-footer p-4 py-3 text-center">
+                  <%= link_to "Add a Camp →", new_camp_path, class:'btn btn-light' %>
                 </div>
             </div>
           </div>
       </div>
   </div>
 </section>
+
+<section class="explore container animateImage" style="max-height: 400px; background-image: url(<%=asset_path('quintaImagen.jpg')%>); ">
+  <div class="explore-content">
+    <h1>Explore the world</h1>
+    <p>Reunite with nature, discover the unknown</p>
+    <a href="#" class="ctn"></a>
+  </div>
+</section>
+
 <div class="container py-4 py-xl-5">
   <div class="row mb-5">
       <div class="col-md-8 col-xl-6 text-center mx-auto">
