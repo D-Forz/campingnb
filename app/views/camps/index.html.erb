@@ -1,23 +1,27 @@
 <div class="container py-4 py-xl-5">
     <div class="row mb-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
+        <!-- Search Bar
             <h2>CAMPINGNB</h2>
             <p class="w-lg-50">THE FOREST ARE CALLING.</p>
+         -->
+         <%= image_tag 'campingnb.png', class: 'img-fluid', alt: 'Campingnb logo', style: 'width:200px' %>
         </div>
     </div>
     <section id="camp" class="camp">
       <div class="container">
         <div class="row camp-container">
-        <div class="form-control" style="background:transparent">
-            <%= form_with url: camps_path, method: :get do %>
-              <%= text_field_tag :query,
-                params[:query],
-                placeholder: "Find a Camp",
-                class: "form-control rounded-pill"
-              %>
-              <%= submit_tag "Search", class: "btn btn-dark p-2" %>
-            <% end %>
-          </div>
+        <!-- Search Bar -->
+        <div class="form-outline">
+          <%= form_tag camps_path, method: :get do %>
+            <%= text_field_tag :query,
+              params[:query],
+              class: "form-control rounded-pill mb-4",
+              placeholder: "Search for a camp"
+            %>
+          <% end %>
+        </div>
+        <!-- End Search Bar -->
           <% @camps.each do |camp| %>
             <div class="col-lg-4 col-md-6 camp-item">
             <%= link_to camp_path(camp) do %>

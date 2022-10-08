@@ -2,7 +2,11 @@ class CampsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_camp, except: %i[index new create my_camps]
   def index
-    @camps = policy_scope(Camp).with_attached_photos
+    @camps = if params[:query].present?
+               policy_scope(Camp).with_attached_photos.where("address ILIKE ?", "%#{params[:query]}%")
+             else
+               policy_scope(Camp).with_attached_photos
+             end
     @pagy, @camps = pagy(@camps, items: 12)
   end
 
