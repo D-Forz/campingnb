@@ -1,7 +1,7 @@
 <!-- Carousel -->
 <div class="container my-3">
   <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-    <div class="carousel-inner" style="max-height: 600px">
+    <div class="carousel-inner" style="max-height: 600px; border-radius:5px">
       <% @camp.photos.each_with_index do |photo, index| %>
         <div class="carousel-item <%= 'active' if index == 0 %>">
           <%= cl_image_tag photo.key, class: 'w-100 d-block img-fluid', alt: 'Slide Image of the Camp' %>
@@ -92,7 +92,7 @@
           <% if user_signed_in? && current_user.reviewed?(@camp) %>
             <h4 class="text-center">Leave your review</h4>
             <div class="col py-2">
-              <%= simple_form_for [ @camp, @review ], wrapper: :input_group do |f| %>
+              <%= simple_form_for [ @camp, @review ] do |f| %>
                 <%= f.input :rating, label:false do %>
                   <%= f.input_field :rating, as: :select, collection: (1..5),
                   data: { controller: 'star-rating' } %>

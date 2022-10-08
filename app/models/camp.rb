@@ -6,7 +6,7 @@ class Camp < ApplicationRecord
   has_many_attached :photos
 
   validates :name, :address, :start_date, :end_date, presence: true
-  validates :description, length: { minimum: 20 }, allow_blank: false
+  validates :description, length: { minimum: 20, maximum: 500 }, allow_blank: false
   validates :price, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :capacity, presence: true, numericality: { only_integer: true }, inclusion: { in: 1..10 }
   validates :photos, presence: true
