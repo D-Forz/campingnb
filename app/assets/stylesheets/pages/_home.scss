@@ -112,10 +112,10 @@ p {
 
 
 /*  Animations */
-img {
+.imagen {
   transition: transform .3s ease;
 }
-img:hover {
+.imagen:hover {
   transform: scale(1.1);
 }
 
