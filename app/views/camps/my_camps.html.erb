@@ -4,8 +4,8 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       <% @camps.each do |camp| %>
         <div class="col">
-          <div class="card shadow-sm">
-            <%= cl_image_tag camp.photos.first.key, class:'bd-placeholder-img card-img-top', height: '225', width: '100%', focus_on: 'face', alt: 'Placeholder image' %>
+          <div class="card shadow-sm my-round">
+            <%= cl_image_tag camp.photos.first.key, class:'bd-placeholder-img card-img-top my-round-top', height: '225', width: '100%', focus_on: 'face', alt: 'Placeholder image' %>
             <div class="card-body">
               <ul class="list-inline d-flex justify-content-between">
                 <li class="list-inline-item card-title fw-bold"><%= camp.name %></li>
