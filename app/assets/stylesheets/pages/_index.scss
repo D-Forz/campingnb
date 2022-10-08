@@ -5,10 +5,12 @@
 
 .camp .camp-item {
   margin-bottom: 30px;
-  // shadow
-
 }
 
+.form-control:focus {
+  border-color: $secondary;
+  box-shadow: none;
+}
 
 .camp .camp-wrap {
   border-radius: 5px;
